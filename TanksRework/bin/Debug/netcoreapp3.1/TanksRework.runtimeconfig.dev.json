@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\zmres\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\zmres\\.nuget\\packages"
+      "C:\\Users\\KOmpas\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\KOmpas\\.nuget\\packages"
     ]
   }
 }
