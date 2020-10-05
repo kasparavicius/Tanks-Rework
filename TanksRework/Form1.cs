@@ -32,6 +32,7 @@ namespace TanksRework
 
         public Form1()
         {
+            this.ControlBox = false;
             InitializeComponent();
             dataGridView1.RowCount = 20;
             dataGridView1.ColumnCount = 25;
