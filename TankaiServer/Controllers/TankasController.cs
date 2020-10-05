@@ -37,6 +37,18 @@ namespace TankaiServer.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [System.Web.Http.HttpGet]
+        public JsonResult DetailsOfOther(string id)
+        {
+            Models.MongoHelper.ConnectToMongoService();
+            Models.MongoHelper.tanks_collection =
+                Models.MongoHelper.database.GetCollection<Models.Tankas>("tanks");
+            var filter = Builders<Models.Tankas>.Filter.Ne("_id", id);
+            var result = Models.MongoHelper.tanks_collection.Find(filter).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Tankas/Create
         public ActionResult Create()
         {

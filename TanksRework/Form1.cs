@@ -19,11 +19,15 @@ namespace TanksRework
 {
     public partial class Form1 : Form
     {
+        List<Player> enemies = new List<Player>();
+        List<Player> enemiesold = new List<Player>();
         Player zaidejas = new Player();
 
         static HttpClient client = new HttpClient();
 
         private string getUrl = "https://localhost:44356/tankas/details/";
+        private string getEnemies = "https://localhost:44356/tankas/detailsofother/";
+
         private string postUrl = "https://localhost:44356/tankas/CreateTank";
         private string locationUrl = "https://localhost:44356/tankas/ChangeLocation";
         private string removeUrl = "https://localhost:44356/tankas/Remove";
@@ -37,45 +41,45 @@ namespace TanksRework
             InitializeComponent();
             dataGridView1.RowCount = 18;
             dataGridView1.ColumnCount = 25;
-            zaidejas = getPlayerDetails("7x6s7vs5adns84au9ypkg5d6");
-            IRestClient restClient = new RestClient();
+            //zaidejas = getPlayerDetails("7x6s7vs5adns84au9ypkg5d6");
+            //IRestClient restClient = new RestClient();
 
-            //Getas
-            IRestRequest restRequest = new RestRequest(getUrl + "7x6s7vs5adns84au9ypkg5d6");
-            restRequest.AddHeader("Accept", "application/json");
-            IRestResponse<Player> restResponse = restClient.Get<Player>(restRequest);
+            ////Getas
+            //IRestRequest restRequest = new RestRequest(getUrl + "7x6s7vs5adns84au9ypkg5d6");
+            //restRequest.AddHeader("Accept", "application/json");
+            //IRestResponse<Player> restResponse = restClient.Get<Player>(restRequest);
 
-            if (restResponse.IsSuccessful)
-            {
-                label1.Text = restResponse.Data.pavadinimas;
-            }
-            else
-            {
-                label1.Text = restResponse.ErrorMessage;
-            }
+            //if (restResponse.IsSuccessful)
+            //{
+            //    label1.Text = restResponse.Data.pavadinimas;
+            //}
+            //else
+            //{
+            //    label1.Text = restResponse.ErrorMessage;
+            //}
 
 
-            //Tankiukas
-            zaidejas.metai = 8888;
-            zaidejas.pavadinimas = "ParduoduAscona";
-            zaidejas.pozicijax = 5;
-            zaidejas.pozicijay = 5;
+            //////Tankiukas
+            //zaidejas.metai = 8888;
+            //zaidejas.pavadinimas = "ParduoduAscona";
+            //zaidejas.pozicijax = 5;
+            //zaidejas.pozicijay = 5;
 
-            //Postas
-            IRestRequest request = new RestRequest()
-            {
-                Resource = postUrl
-            };
+            ////Postas
+            //IRestRequest request = new RestRequest()
+            //{
+            //    Resource = postUrl
+            //};
 
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Accept", "application/xml");
-            request.AddJsonBody(zaidejas);
+            //request.AddHeader("Content-Type", "application/json");
+            //request.AddHeader("Accept", "application/xml");
+            //request.AddJsonBody(zaidejas);
 
-            IRestResponse<string> response = restClient.Post<string>(request);
-            zaidejas._id = response.Data;
-            //zaidejas._id = playerId;
-            label2.Text = zaidejas._id;
-            DisplayPlayer(100, 100);
+            //IRestResponse<string> response = restClient.Post<string>(request);
+            //zaidejas._id = response.Data;
+            ////zaidejas._id = playerId;
+            //label2.Text = zaidejas._id;
+            //DisplayPlayer(100, 100);
 
         }
 
@@ -115,14 +119,39 @@ namespace TanksRework
             }
             else
             {
-                label1.Text = restResponse.ErrorMessage;
+               // label1.Text = restResponse.ErrorMessage;
             }
 
             return null;
         }
 
+        /// <summary>
+        /// returns details of enemies
+        /// </summary>
+        /// <param name="id">player id</param>
+        /// <returns></returns>
+        private List<Player> getEnemiesDetails(string id)
+        {
+            IRestClient restClient = new RestClient();
+
+            IRestRequest restRequest = new RestRequest(getEnemies + id);
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<List<Player>> restResponse = restClient.Get<List<Player>>(restRequest);
+
+            if (restResponse.IsSuccessful)
+            {
+                return restResponse.Data;
+            }
+            else
+            {
+                // label1.Text = restResponse.ErrorMessage;
+            }
+
+            return null;
+        }
         private void updatePlayerDetails()
         {
+            updateEnemiesDetails();
             IRestClient restClient = new RestClient();
             IRestRequest request = new RestRequest()
             {
@@ -135,6 +164,41 @@ namespace TanksRework
             request.AddJsonBody(zaidejas);
 
             IRestResponse response = restClient.Patch(request);
+        }
+
+        private void updateEnemiesDetails()
+        {
+
+            enemies = getEnemiesDetails(zaidejas._id);
+            DisplayEnemies(enemies, enemiesold);
+            enemiesold = enemies;
+        }
+
+        private void DisplayEnemies(List<Player> naujas, List<Player> senas)
+        {
+
+            Bitmap img = (Bitmap)Bitmap.FromFile("assets\\tankas2d.png");
+            Bitmap newImage = new Bitmap(img, 20, 20);
+            DataGridViewImageCell icell = new DataGridViewImageCell();
+            icell.Value = newImage;
+            string empty = "";
+
+            if (senas.Count <= 1)
+            {
+                foreach (var vienas in senas)
+                {
+                    dataGridView1[vienas.pozicijax, vienas.pozicijay].Value = new Bitmap(1, 1);
+                }
+            }
+
+            foreach (var vienas in naujas)
+            {
+                dataGridView1[vienas.pozicijax, vienas.pozicijay] = icell;
+
+            }       
+
+           
+
         }
 
         //Remove on close
@@ -264,6 +328,36 @@ namespace TanksRework
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            IRestClient restClient = new RestClient();
+
+            if (textBox2.Text != null)
+            {
+                Random rnd = new Random();
+                zaidejas.metai = 1998;
+                zaidejas.pavadinimas = textBox2.Text;
+                zaidejas.pozicijax = rnd.Next(1, 15);
+                zaidejas.pozicijay = rnd.Next(1, 15);
+
+                //Postas
+                IRestRequest request = new RestRequest()
+                {
+                    Resource = postUrl
+                };
+
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Accept", "application/xml");
+                request.AddJsonBody(zaidejas);
+
+                IRestResponse<string> response = restClient.Post<string>(request);
+                zaidejas._id = response.Data;
+                //zaidejas._id = playerId;
+                label2.Text = zaidejas._id;
+                DisplayPlayer(100, 100);
+            }
         }
     }
 }
