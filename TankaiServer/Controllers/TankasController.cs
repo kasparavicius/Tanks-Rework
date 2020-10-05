@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace TankaiServer.Controllers
         }
 
         // GET: Tankas/Details/5
-        public ActionResult Details(string id)
+        public JsonResult Details(string id)
         {
             Models.MongoHelper.ConnectToMongoService();
             Models.MongoHelper.tanks_collection =
@@ -32,7 +33,7 @@ namespace TankaiServer.Controllers
             var filter = Builders<Models.Tankas>.Filter.Eq("_id", id);
             var result = Models.MongoHelper.tanks_collection.Find(filter).FirstOrDefault();
 
-            return View(result);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Tankas/Create
@@ -57,7 +58,9 @@ namespace TankaiServer.Controllers
                 Models.MongoHelper.tanks_collection.InsertOneAsync(new Models.Tankas { 
                     _id = id,
                     pavadinimas = collection["pavadinimas"],
-                    metai = Int32.Parse(collection["metai"])
+                    metai = Int32.Parse(collection["metai"]),
+                    pozicijax = Int32.Parse(collection["pozicijax"]),
+                    pozicijay = Int32.Parse(collection["pozicijay"])
                 });
 
                 return RedirectToAction("Index");
