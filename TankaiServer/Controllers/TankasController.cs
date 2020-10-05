@@ -118,6 +118,8 @@ namespace TankaiServer.Controllers
                 var filter = Builders<Models.Tankas>.Filter.Eq("_id", id);
 
                 var upadate = Builders<Models.Tankas>.Update
+                    .Set("pozicijax", Int32.Parse(collection["pozicijax"]))
+                    .Set("pozicijay", Int32.Parse(collection["pozicijay"]))
                     .Set("pavadinimas", collection["pavadinimas"])
                     .Set("metai", Int32.Parse(collection["metai"]));
  

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1Femif5F92ZPtI+5MaMxQ0o3/WoxRzooJ59bWrjammiptvQ4qp0RXMV1zXjvXWgA96lAot+Qk9ENGyMbVJlbog==",
+  "dgSpecHash": "qye+tuLcjUyBlwjDEsnNAqZ5sIZiRezYW5KapbNhPssyeGdemdrJhH7fMlzo5/bC61uieYhp1LDOl3ahjJQt+g==",
   "success": true,
   "projectFilePath": "D:\\Programavimas\\TanksRework\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\KOmpas\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512"
+  ],
   "logs": []
 }

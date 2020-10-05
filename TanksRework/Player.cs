@@ -21,5 +21,14 @@ namespace TanksRework
             pavadinimas = "";
             metai = 0;
         }
+
+        public Player(Object _id, int pozicijax, int pozicijay, string pavadinimas, int metai)
+        {
+            this._id = _id;
+            this.pozicijax = pozicijax;
+            this.pozicijay = pozicijay;
+            this.pavadinimas = pavadinimas;
+            this.metai = metai;
+        }
     }
 }

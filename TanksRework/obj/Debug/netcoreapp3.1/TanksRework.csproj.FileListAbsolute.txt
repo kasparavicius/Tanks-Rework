@@ -28,3 +28,5 @@ D:\Studijos\4kursas\1pusmetis\objektinis\Tanks-Rework\TanksRework\bin\Debug\netc
 D:\Studijos\4kursas\1pusmetis\objektinis\Tanks-Rework\TanksRework\bin\Debug\netcoreapp3.1\TanksRework.pdb
 D:\Studijos\4kursas\1pusmetis\objektinis\Tanks-Rework\TanksRework\bin\Debug\netcoreapp3.1\RestSharp.dll
 D:\Studijos\4kursas\1pusmetis\objektinis\Tanks-Rework\TanksRework\obj\Debug\netcoreapp3.1\TanksRework.csproj.CopyComplete
+D:\Programavimas\TanksRework\Tanks-Rework\TanksRework\bin\Debug\netcoreapp3.1\RestSharp.dll
+D:\Programavimas\TanksRework\Tanks-Rework\TanksRework\obj\Debug\netcoreapp3.1\TanksRework.csproj.CopyComplete
