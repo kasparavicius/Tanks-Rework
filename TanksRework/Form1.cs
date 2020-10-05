@@ -3,42 +3,73 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RestSharp;
 
 namespace TanksRework
 {
     public partial class Form1 : Form
     {
         Player zaidejas = new Player();
+        static string eilute = "";
         static HttpClient client = new HttpClient();
 
+        private string getUrl = "https://localhost:44356/tankas/details/dgh13dcmybva4uo3gft2fx3u";
+        private string postUrl = "https://localhost:44356/tankas/CreateTank";
 
         public Form1()
         {
-            client.BaseAddress = new Uri("http://localhost:44356/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
             InitializeComponent();
             dataGridView1.RowCount = 20;
             dataGridView1.ColumnCount = 20;
-            zaidejas = GetProductAsync("dgh13dcmybva4uo3gft2fx3u");
-            label1.Text = zaidejas.pavadinimas; 
             
+            IRestClient restClient = new RestClient();
+
+            //Getas
+            IRestRequest restRequest = new RestRequest(getUrl);
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<Player> restResponse = restClient.Get<Player>(restRequest);
+
+            if (restResponse.IsSuccessful)
+            {
+                label1.Text = restResponse.Data.pavadinimas;
+            }
+            else
+            {
+                label1.Text = restResponse.ErrorMessage;
+            }
+
+
+            //Tankiukas
+            Player tankiukas = new Player();
+            tankiukas.metai = 1919;
+            tankiukas.pavadinimas = "ZaliaSiera";
+            tankiukas.pozicijax = 5;
+            tankiukas.pozicijay = 5;
+
+            //Postas
+            IRestRequest request = new RestRequest()
+            {
+                Resource = postUrl
+            };
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/xml");
+            //request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(tankiukas);
+
+            IRestResponse response = restClient.Post(request);
+            label1.Text = response.StatusCode.ToString();
+
         }
 
-        static async Task<Player> GetProductAsync(string id)
-        {
-            Player zzaidejas = new Player();
-            string response = await client.GetStringAsync($"tankas/details/{id}");
-            zzaidejas.pavadinimas = response;
-            return zzaidejas;
-        }
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
