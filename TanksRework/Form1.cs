@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 using RestSharp;
 
 namespace TanksRework
@@ -34,7 +35,7 @@ namespace TanksRework
         {
             this.ControlBox = false;
             InitializeComponent();
-            dataGridView1.RowCount = 20;
+            dataGridView1.RowCount = 18;
             dataGridView1.ColumnCount = 25;
             zaidejas = getPlayerDetails("7x6s7vs5adns84au9ypkg5d6");
             IRestClient restClient = new RestClient();
@@ -153,14 +154,32 @@ namespace TanksRework
 
         private void DisplayPlayer(int senasx, int senasy)
         {
+
+            Bitmap img = (Bitmap) Bitmap.FromFile("assets\\tankas2d.png");
+            Bitmap newImage = new Bitmap(img, 20, 20);
+            DataGridViewImageCell icell = new DataGridViewImageCell();
+            icell.Value = newImage;
+            string empty = "";
+            
             if (senasx < 100 && senasy < 100)
             {
-                dataGridView1[senasx, senasy].Value = "";
+                dataGridView1[senasx, senasy].Value = new Bitmap(1, 1);
 
-                dataGridView1[zaidejas.pozicijax, zaidejas.pozicijay].Value = "T";
+                dataGridView1[zaidejas.pozicijax, zaidejas.pozicijay] = icell;
             }
-            else dataGridView1[zaidejas.pozicijax, zaidejas.pozicijay].Value = "T";
+            else dataGridView1[zaidejas.pozicijax, zaidejas.pozicijay] = icell;
 
+        }
+
+        private void dataGridView1_CellFormatting(object sender,
+    DataGridViewCellFormattingEventArgs e)
+        {
+            String value = e.Value as string;
+            if ((value != null) && value.Equals(e.CellStyle.DataSourceNullValue))
+            {
+                e.Value = e.CellStyle.NullValue;
+                e.FormattingApplied = true;
+            }
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -172,9 +191,13 @@ namespace TanksRework
         {
             int senasx = zaidejas.pozicijax;
             int senasy = zaidejas.pozicijay;
-            zaidejas.pozicijay -= 1;
-            updatePlayerDetails();
-            DisplayPlayer(senasx, senasy);
+            if (senasy > 0)
+            {
+                zaidejas.pozicijay -= 1;
+                updatePlayerDetails();
+                DisplayPlayer(senasx, senasy);
+            }
+            
         }
         //left
         private void button2_Click(object sender, EventArgs e)
@@ -184,30 +207,36 @@ namespace TanksRework
             if (zaidejas.pozicijax > 0)
             {
                 zaidejas.pozicijax -= 1;
+                updatePlayerDetails();
+                DisplayPlayer(senasx, senasy);
             }
-            updatePlayerDetails();
-            DisplayPlayer(senasx, senasy);
-
+            
         }
         //right
         private void button1_Click(object sender, EventArgs e)
         {
             int senasx = zaidejas.pozicijax;
             int senasy = zaidejas.pozicijay;
-            zaidejas.pozicijax += 1;
-            updatePlayerDetails();
-            DisplayPlayer(senasx, senasy);
-
+            if (senasx < 24)
+            {
+                zaidejas.pozicijax += 1;
+                updatePlayerDetails();
+                DisplayPlayer(senasx, senasy);
+            }
+            
         }
         //down
         private void button4_Click(object sender, EventArgs e)
         {
             int senasx = zaidejas.pozicijax;
             int senasy = zaidejas.pozicijay;
-            zaidejas.pozicijay += 1;
-            updatePlayerDetails();
-            DisplayPlayer(senasx, senasy);
-
+            if (senasy < 17)
+            {
+                zaidejas.pozicijay += 1;
+                updatePlayerDetails();
+                DisplayPlayer(senasx, senasy);
+            }
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -234,7 +263,7 @@ namespace TanksRework
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
     }
 }
