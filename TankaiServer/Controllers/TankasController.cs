@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace TankaiServer.Controllers
@@ -43,7 +44,7 @@ namespace TankaiServer.Controllers
         }
 
         // POST: Tankas/Create
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -78,6 +79,19 @@ namespace TankaiServer.Controllers
             return new string(Enumerable.Repeat(strarray, v).Select(s=>s[random.Next(strarray.Length)]).ToArray());
         }
 
+        [System.Web.Http.HttpPost]
+        public void CreateTank([FromBody]Models.Tankas value)
+        {
+            Models.MongoHelper.ConnectToMongoService();
+            Models.MongoHelper.tanks_collection =
+                Models.MongoHelper.database.GetCollection<Models.Tankas>("tanks");
+
+            Object id = GenerateRandomID(24);
+            value._id = id;
+            Models.MongoHelper.tanks_collection.InsertOneAsync(value);
+
+        }
+
         // GET: Tankas/Edit/5
         public ActionResult Edit(string id)
         {
@@ -92,7 +106,7 @@ namespace TankaiServer.Controllers
         }
 
         // POST: Tankas/Edit/5
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult Edit(string id, FormCollection collection)
         {
             try
@@ -132,7 +146,7 @@ namespace TankaiServer.Controllers
         }
 
         // POST: Tankas/Delete/5
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         public ActionResult Delete(string id, FormCollection collection)
         {
             try
