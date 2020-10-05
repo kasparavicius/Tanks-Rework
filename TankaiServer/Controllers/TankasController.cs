@@ -80,7 +80,7 @@ namespace TankaiServer.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public void CreateTank([FromBody]Models.Tankas value)
+        public ActionResult CreateTank([FromBody]Models.Tankas value)
         {
             Models.MongoHelper.ConnectToMongoService();
             Models.MongoHelper.tanks_collection =
@@ -90,6 +90,7 @@ namespace TankaiServer.Controllers
             value._id = id;
             Models.MongoHelper.tanks_collection.InsertOneAsync(value);
 
+            return Json(id);
         }
 
         // GET: Tankas/Edit/5
@@ -134,6 +135,36 @@ namespace TankaiServer.Controllers
             }
         }
 
+        //Upade locations
+        [System.Web.Mvc.HttpPatch]
+        public void ChangeLocation(string id, [FromBody] Models.Tankas value)
+        {
+            try
+            {
+                Models.MongoHelper.ConnectToMongoService();
+                Models.MongoHelper.tanks_collection =
+                    Models.MongoHelper.database.GetCollection<Models.Tankas>("tanks");
+
+                var filter = Builders<Models.Tankas>.Filter.Eq("_id", id);
+
+                var upadate = Builders<Models.Tankas>.Update
+                    .Set("pozicijax", value.pozicijax)
+                    .Set("pozicijay", value.pozicijay);
+                    //.Set("pavadinimas", collection["pavadinimas"])
+                    //.Set("metai", Int32.Parse(collection["metai"]));
+
+                var result = Models.MongoHelper.tanks_collection.UpdateOneAsync(filter, upadate);
+
+
+                //return RedirectToAction("Index");
+            }
+            catch
+            {
+                //return View();
+            }
+        }
+        //Json(db.Orders.ToList(), JsonRequestBehavior.AllowGet);
+
         // GET: Tankas/Delete/5
         public ActionResult Delete(string id)
         {
@@ -166,6 +197,27 @@ namespace TankaiServer.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        //Remove player when closing
+        [System.Web.Mvc.HttpDelete]
+        public void Remove(string id)
+        {
+            try
+            {
+                Models.MongoHelper.ConnectToMongoService();
+                Models.MongoHelper.tanks_collection =
+                    Models.MongoHelper.database.GetCollection<Models.Tankas>("tanks");
+
+                var filter = Builders<Models.Tankas>.Filter.Eq("_id", id);
+
+                var result = Models.MongoHelper.tanks_collection.DeleteOneAsync(filter);
+
+            }
+            catch
+            {
+
             }
         }
     }

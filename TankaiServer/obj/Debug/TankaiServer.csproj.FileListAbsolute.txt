@@ -199,3 +199,4 @@ D:\Programavimas\TanksRework\Tanks-Rework\TankaiServer\bin\MongoDB.Bson.xml
 D:\Programavimas\TanksRework\Tanks-Rework\TankaiServer\bin\MongoDB.Driver.xml
 D:\Programavimas\TanksRework\Tanks-Rework\TankaiServer\bin\MongoDB.Driver.Core.xml
 D:\Programavimas\TanksRework\Tanks-Rework\TankaiServer\bin\System.Buffers.xml
+D:\Studijos\4kursas\1pusmetis\objektinis\Tanks-Rework\TankaiServer\obj\Debug\TankaiServer.csproj.CoreCompileInputs.cache
