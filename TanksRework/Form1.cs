@@ -177,7 +177,7 @@ namespace TanksRework
         private void DisplayEnemies(List<Player> naujas, List<Player> senas)
         {
 
-            Bitmap img = (Bitmap)Bitmap.FromFile("assets\\tankas2d.png");
+            Bitmap img = (Bitmap)Bitmap.FromFile("assets\\tankas2denemy.png");
             Bitmap newImage = new Bitmap(img, 20, 20);
             DataGridViewImageCell icell = new DataGridViewImageCell();
             icell.Value = newImage;
@@ -193,7 +193,11 @@ namespace TanksRework
 
             foreach (var vienas in naujas)
             {
-                dataGridView1[vienas.pozicijax, vienas.pozicijay] = icell;
+                if (dataGridView1[vienas.pozicijax, vienas.pozicijay] != icell)
+                {
+                    dataGridView1[vienas.pozicijax, vienas.pozicijay] = icell;
+
+                }
 
             }       
 
