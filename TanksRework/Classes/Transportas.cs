@@ -9,13 +9,13 @@ namespace TanksRework.Classes
         private String name { get; set; }
         private int healthPoints { get; set; }
         private int damage { get; set; }
-        private int level { get; set; }
-        public Transportas(String nam, int hp, int dmg, int lvl)
+        private int position { get; set; }
+        public Transportas(String nam, int hp, int dmg, int pos)
         {
             name = nam;
             healthPoints = hp;
             damage = dmg;
-            level = lvl;
+            position = pos;
         }
     }
 }
