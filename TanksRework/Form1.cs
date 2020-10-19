@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using RestSharp;
+using RestSharp.Serializers.NewtonsoftJson;
+using TanksRework.Classes;
+using TanksRework.Classes.Observer;
 
 namespace TanksRework
 {
@@ -23,7 +26,12 @@ namespace TanksRework
         List<Player> enemiesold = new List<Player>();
         Player zaidejas = new Player();
 
+        Transportas playeris;// = new TransportasFactory().CreateTransportas(1, "nuva");
+        List<Transportas> priesai;
+
         static HttpClient client = new HttpClient();
+        IRestClient restas = new RestClient();
+
 
         private string getUrl = "https://localhost:44356/tankas/details/";
         private string getEnemies = "https://localhost:44356/tankas/detailsofother/";
@@ -41,6 +49,17 @@ namespace TanksRework
             InitializeComponent();
             dataGridView1.RowCount = 18;
             dataGridView1.ColumnCount = 25;
+
+            timer1.Interval = 500;
+            timer1.Start();
+
+            TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, new int[] { 5, 5 });
+
+            //zaidejas.atnaujinti("la");
+            //Transportas priesas = new TransportasFactory().CreateTransportas(1, "nuva");
+            //zaidejas3.prideti(priesas);
+            //zaidejas3.pranesti("hello");
+
             //zaidejas = getPlayerDetails("7x6s7vs5adns84au9ypkg5d6");
             //IRestClient restClient = new RestClient();
 
@@ -101,7 +120,8 @@ namespace TanksRework
         private Player getPlayerDetails(string id)
         {
             IRestClient restClient = new RestClient();
-      
+            //restClient.UseNewtonsoftJson();
+
             IRestRequest restRequest = new RestRequest(getUrl + id);
             restRequest.AddHeader("Accept", "application/json");
             IRestResponse<Player> restResponse = restClient.Get<Player>(restRequest);
@@ -110,8 +130,7 @@ namespace TanksRework
             {
                 Player unit = new Player(
                     restResponse.Data._id, 
-                    restResponse.Data.pozicijax, 
-                    restResponse.Data.pozicijay,
+                    restResponse.Data.pozicija,
                     restResponse.Data.pavadinimas, 
                     restResponse.Data.metai);
 
@@ -187,15 +206,15 @@ namespace TanksRework
             {
                 foreach (var vienas in senas)
                 {
-                    dataGridView1[vienas.pozicijax, vienas.pozicijay].Value = new Bitmap(1, 1);
+                    dataGridView1[vienas.pozicija[0], vienas.pozicija[1]].Value = new Bitmap(1, 1);
                 }
             }
 
             foreach (var vienas in naujas)
             {
-                if (dataGridView1[vienas.pozicijax, vienas.pozicijay] != icell)
+                if (dataGridView1[vienas.pozicija[0], vienas.pozicija[1]] != icell)
                 {
-                    dataGridView1[vienas.pozicijax, vienas.pozicijay] = icell;
+                    dataGridView1[vienas.pozicija[0], vienas.pozicija[1]] = icell;
 
                 }
 
@@ -233,9 +252,9 @@ namespace TanksRework
             {
                 dataGridView1[senasx, senasy].Value = new Bitmap(1, 1);
 
-                dataGridView1[zaidejas.pozicijax, zaidejas.pozicijay] = icell;
+                dataGridView1[zaidejas.pozicija[0], zaidejas.pozicija[1]] = icell;
             }
-            else dataGridView1[zaidejas.pozicijax, zaidejas.pozicijay] = icell;
+            else dataGridView1[zaidejas.pozicija[0], zaidejas.pozicija[1]] = icell;
 
         }
 
@@ -257,11 +276,11 @@ namespace TanksRework
         // up
         private void button3_Click(object sender, EventArgs e)
         {
-            int senasx = zaidejas.pozicijax;
-            int senasy = zaidejas.pozicijay;
+            int senasx = zaidejas.pozicija[0];
+            int senasy = zaidejas.pozicija[1];
             if (senasy > 0)
             {
-                zaidejas.pozicijay -= 1;
+                zaidejas.pozicija[1] -= 1;
                 updatePlayerDetails();
                 DisplayPlayer(senasx, senasy);
             }
@@ -270,11 +289,11 @@ namespace TanksRework
         //left
         private void button2_Click(object sender, EventArgs e)
         {
-            int senasx = zaidejas.pozicijax;
-            int senasy = zaidejas.pozicijay;
-            if (zaidejas.pozicijax > 0)
+            int senasx = zaidejas.pozicija[0];
+            int senasy = zaidejas.pozicija[1];
+            if (zaidejas.pozicija[0] > 0)
             {
-                zaidejas.pozicijax -= 1;
+                zaidejas.pozicija[0] -= 1;
                 updatePlayerDetails();
                 DisplayPlayer(senasx, senasy);
             }
@@ -283,11 +302,11 @@ namespace TanksRework
         //right
         private void button1_Click(object sender, EventArgs e)
         {
-            int senasx = zaidejas.pozicijax;
-            int senasy = zaidejas.pozicijay;
+            int senasx = zaidejas.pozicija[0];
+            int senasy = zaidejas.pozicija[1];
             if (senasx < 24)
             {
-                zaidejas.pozicijax += 1;
+                zaidejas.pozicija[0] += 1;
                 updatePlayerDetails();
                 DisplayPlayer(senasx, senasy);
             }
@@ -296,11 +315,11 @@ namespace TanksRework
         //down
         private void button4_Click(object sender, EventArgs e)
         {
-            int senasx = zaidejas.pozicijax;
-            int senasy = zaidejas.pozicijay;
+            int senasx = zaidejas.pozicija[0];
+            int senasy = zaidejas.pozicija[1];
             if (senasy < 17)
             {
-                zaidejas.pozicijay += 1;
+                zaidejas.pozicija[1] += 1;
                 updatePlayerDetails();
                 DisplayPlayer(senasx, senasy);
             }
@@ -312,14 +331,31 @@ namespace TanksRework
 
         }
 
-        //update button
+        //Nuskaitom visus esamus priesus
         private void button6_Click(object sender, EventArgs e)
         {
+            IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetEnemyList/" + playeris.getId());
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<List<Transportas>> restResponse = restas.Get<List<Transportas>>(restRequest);
 
+            if (restResponse.IsSuccessful)
+            {
+                //return restResponse.Data;
+                priesai = restResponse.Data;
+                priesai.ForEach(p =>
+                {
+                    playeris.prideti(p);
+                });
+            }
+            else
+            {
+                // label1.Text = restResponse.ErrorMessage;
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
             removePlayer();
             this.Close();
         }
@@ -336,32 +372,55 @@ namespace TanksRework
 
         private void button8_Click(object sender, EventArgs e)
         {
-            IRestClient restClient = new RestClient();
+            //IRestClient restClient = new RestClient();
 
             if (textBox2.Text != null)
             {
-                Random rnd = new Random();
+                /*Random rnd = new Random();
                 zaidejas.metai = 1998;
                 zaidejas.pavadinimas = textBox2.Text;
-                zaidejas.pozicijax = rnd.Next(1, 15);
-                zaidejas.pozicijay = rnd.Next(1, 15);
+                zaidejas.pozicija[0] = rnd.Next(1, 15);
+                zaidejas.pozicija[1] = rnd.Next(1, 15);*/
+
+                playeris = new TransportasFactory().CreateTransportas(1, textBox2.Text);
+
+                restas.UseNewtonsoftJson();
 
                 //Postas
                 IRestRequest request = new RestRequest()
                 {
-                    Resource = postUrl
+                    Resource = "https://localhost:44356/Tankas/Connect/"
                 };
 
                 request.AddHeader("Content-Type", "application/json");
                 request.AddHeader("Accept", "application/xml");
-                request.AddJsonBody(zaidejas);
+                request.AddJsonBody(playeris);
 
-                IRestResponse<string> response = restClient.Post<string>(request);
-                zaidejas._id = response.Data;
+                IRestResponse<string> response = restas.Post<string>(request);
+                playeris.setId(response.Data);// = response.Data;
                 //zaidejas._id = playerId;
-                label2.Text = zaidejas._id;
-                DisplayPlayer(100, 100);
+                label2.Text = playeris.getId();
+                //DisplayPlayer(100, 100);
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+         /*   //TO-DO: Get changes from server
+            IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetEnemyList/" + playeris.getId());
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<List<Transportas>> restResponse = restas.Get<List<Transportas>>(restRequest);
+
+            if (restResponse.IsSuccessful)
+            {
+                //return restResponse.Data;
+                //priesai = restResponse.Data;
+                playeris.pranesti(restResponse.Data);
+            }
+            else
+            {
+                // label1.Text = restResponse.ErrorMessage;
+            }*/
         }
     }
 }

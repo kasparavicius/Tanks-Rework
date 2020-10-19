@@ -7,10 +7,11 @@ namespace TankaiServer.Models
 {
     public class Tankas
     {
-        public Object _id { get; set; }
-        public int pozicijax { get; set; }
-        public int pozicijay { get; set; }
-        public string pavadinimas { get; set; }
-        public int metai { get; set; }
+        public string _id { get; set; }
+        public string name { get; set; }
+        public int healthPoints { get; set; }
+        public int damage { get; set; }
+        public int[] position { get; set; }
+        public bool updated { get; set; }
     }
 }

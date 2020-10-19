@@ -6,11 +6,90 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using TankaiServer.Models;
 
 namespace TankaiServer.Controllers
 {
     public class TankasController : Controller
     {
+        [System.Web.Http.HttpGet]
+        public JsonResult GetPlayerList()
+        {
+            //System.Web.HttpContext.Current.Application.Lock();
+            //System.Web.HttpContext.Current.Application["Name"] = "Value";
+            //System.Web.HttpContext.Current.Application.UnLock();
+            return Json((List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"], JsonRequestBehavior.AllowGet);
+        }
+
+        [System.Web.Http.HttpGet]
+        public JsonResult GetEnemyList(string id)
+        {
+            List<Tankas> zaidejai = (List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"];
+            zaidejai.Find(z => z._id == id).updated = true;
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
+            System.Web.HttpContext.Current.Application.UnLock();
+
+            return Json(zaidejai.FindAll(z => z._id != id), JsonRequestBehavior.AllowGet);
+        }
+
+        [System.Web.Http.HttpPost]
+        public ActionResult Connect([FromBody] Models.Tankas value)
+        {
+            string id = GenerateRandomID(24);
+            value._id = id;
+            value.updated = false;
+
+            List<Tankas> zaidejai = (List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"] ?? new List<Tankas>();
+            zaidejai.Add(value);
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
+            System.Web.HttpContext.Current.Application.UnLock();
+
+            return Json(id);
+        }
+
+        [System.Web.Http.HttpPost]
+        public ActionResult Disconnect([FromBody] Models.Tankas value)
+        {
+            string msg = "hello";
+            List<Tankas> zaidejai = (List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"];
+
+            zaidejai.RemoveAll(p => p._id == value._id);
+
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
+            System.Web.HttpContext.Current.Application.UnLock();
+            return Json(msg);
+        }
+
+        [System.Web.Http.HttpPatch]
+        public ActionResult Position([FromBody] Models.Tankas value)
+        {
+            string msg = "hello";
+            List<Tankas> zaidejai = (List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"];
+
+            zaidejai.Find(z => z._id == value._id).position = value.position;
+            zaidejai.ForEach(z =>
+            {
+                if (z._id != value._id)
+                {
+                    z.updated = false;
+                }
+            });
+
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
+            System.Web.HttpContext.Current.Application.UnLock();
+            return Json(msg);
+        }
+
+
+
+
+
+
+
         // GET: Tankas
         public ActionResult Index()
         {
@@ -55,7 +134,7 @@ namespace TankaiServer.Controllers
             return View();
         }
 
-        // POST: Tankas/Create
+        /*// POST: Tankas/Create
         [System.Web.Mvc.HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -66,14 +145,14 @@ namespace TankaiServer.Controllers
                     Models.MongoHelper.database.GetCollection<Models.Tankas>("tanks");
 
                 //Create some _id
-                Object id = GenerateRandomID(24);
+                string id = GenerateRandomID(24);
 
                 Models.MongoHelper.tanks_collection.InsertOneAsync(new Models.Tankas { 
                     _id = id,
                     pavadinimas = collection["pavadinimas"],
                     metai = Int32.Parse(collection["metai"]),
-                    pozicijax = Int32.Parse(collection["pozicijax"]),
-                    pozicijay = Int32.Parse(collection["pozicijay"])
+                    //pozicija = collection["pozicija"]
+                    //pozicijay = Int32.Parse(collection["pozicijay"])
                 });
 
                 return RedirectToAction("Index");
@@ -82,10 +161,10 @@ namespace TankaiServer.Controllers
             {
                 return View();
             }
-        }
+        }*/
 
         private static Random random = new Random();
-        private object GenerateRandomID(int v)
+        private string GenerateRandomID(int v)
         {
             string strarray = "abcdefghijklmnoprstuvwxyz123456789";
             return new string(Enumerable.Repeat(strarray, v).Select(s=>s[random.Next(strarray.Length)]).ToArray());
@@ -98,7 +177,7 @@ namespace TankaiServer.Controllers
             Models.MongoHelper.tanks_collection =
                 Models.MongoHelper.database.GetCollection<Models.Tankas>("tanks");
 
-            Object id = GenerateRandomID(24);
+            string id = GenerateRandomID(24);
             value._id = id;
             Models.MongoHelper.tanks_collection.InsertOneAsync(value);
 
@@ -151,7 +230,7 @@ namespace TankaiServer.Controllers
         [System.Web.Mvc.HttpPatch]
         public void ChangeLocation(string id, [FromBody] Models.Tankas value)
         {
-            try
+            /*try
             {
                 Models.MongoHelper.ConnectToMongoService();
                 Models.MongoHelper.tanks_collection =
@@ -160,8 +239,7 @@ namespace TankaiServer.Controllers
                 var filter = Builders<Models.Tankas>.Filter.Eq("_id", id);
 
                 var upadate = Builders<Models.Tankas>.Update
-                    .Set("pozicijax", value.pozicijax)
-                    .Set("pozicijay", value.pozicijay);
+                    .Set("pozicija", value.pozicija);
                     //.Set("pavadinimas", collection["pavadinimas"])
                     //.Set("metai", Int32.Parse(collection["metai"]));
 
@@ -173,7 +251,7 @@ namespace TankaiServer.Controllers
             catch
             {
                 //return View();
-            }
+            }*/
         }
         //Json(db.Orders.ToList(), JsonRequestBehavior.AllowGet);
 

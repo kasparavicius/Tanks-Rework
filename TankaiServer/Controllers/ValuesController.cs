@@ -22,8 +22,9 @@ namespace TankaiServer.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody] string value)
+        public string Post([FromBody] string value)
         {
+            return value + "; papostinta!";
         }
 
         // PUT api/values/5

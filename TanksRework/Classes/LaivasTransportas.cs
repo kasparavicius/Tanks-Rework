@@ -6,7 +6,7 @@ namespace TanksRework.Classes
 {
     class LaivasTransportas : Transportas
     {
-        internal LaivasTransportas(String nam, int hp, int dmg, int pos) : base(nam, hp, dmg, pos)
+        internal LaivasTransportas(String nam, int hp, int dmg, int[] pos) : base(nam, hp, dmg, pos)
         {
         }
     }
