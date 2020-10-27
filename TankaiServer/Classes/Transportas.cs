@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Classes.Observer;
-using RestSharp.Serializers.NewtonsoftJson;
-using RestSharp;
 using Newtonsoft.Json;
 
 namespace Classes
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public abstract class Transportas : Observer.Subject, Observer.IObserver
+    public abstract class Transportas
     {
         [JsonProperty]
         private string _id { get; set; }
@@ -21,6 +18,9 @@ namespace Classes
         private int damage { get; set; }
         [JsonProperty]
         private int[] position { get; set; }
+        [JsonProperty]
+        public bool updated { get; set; }
+
         public Transportas(String nam, int hp, int dmg, int[] pos)
         {
             name = nam;
@@ -38,10 +38,13 @@ namespace Classes
             _id = id;
         }
 
-        void IObserver.atnaujinti(List<Transportas> updPriesai)
+        public int[] getPos()
         {
-            //Atnaujint info (pos = new pos)
-            position = updPriesai.Find(p => p.getId() == _id).position;
+            return position;
+        }
+        public void setPos(int[] pos)
+        {
+            position = pos;
         }
     }
 }

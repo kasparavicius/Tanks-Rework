@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TanksRework.Classes.Observer
+namespace Classes.Observer
 {
     public interface IObserver
     {

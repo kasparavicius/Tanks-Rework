@@ -13,5 +13,6 @@ namespace TankaiServer.Models
         public int damage { get; set; }
         public int[] position { get; set; }
         public bool updated { get; set; }
+        public string type { get; set; }
     }
 }

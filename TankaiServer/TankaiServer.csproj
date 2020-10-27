@@ -215,8 +215,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Classes\LaivasTransportas.cs" />
+    <Compile Include="Classes\LektuvasTransportas.cs" />
+    <Compile Include="Classes\TankasTransportas.cs" />
+    <Compile Include="Classes\Transportas.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TankasController.cs" />
+    <Compile Include="Controllers\TransportasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

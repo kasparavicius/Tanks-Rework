@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TanksRework.Classes.Observer
+namespace Classes.Observer
 {
 	public abstract class Subject
 	{
-		List<IObserver> observers;
+		private List<IObserver> observers;
 
 		public void pranesti(List<Transportas> priesai)//POSTina savo pos ir serveri, mainais gauna priesu pos ir updeitina.
 		{

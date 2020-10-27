@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TanksRework.Classes
+namespace Classes
 {
     public class TransportasFactory
     {

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using TankaiServer.Models;
+using Classes;
 
 namespace TankaiServer.Controllers
 {
@@ -18,29 +19,29 @@ namespace TankaiServer.Controllers
             //System.Web.HttpContext.Current.Application.Lock();
             //System.Web.HttpContext.Current.Application["Name"] = "Value";
             //System.Web.HttpContext.Current.Application.UnLock();
-            return Json((List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"], JsonRequestBehavior.AllowGet);
+            return Json((List<Transportas>)System.Web.HttpContext.Current.Application["zaidejai"], JsonRequestBehavior.AllowGet);
         }
 
         [System.Web.Http.HttpGet]
         public JsonResult GetEnemyList(string id)
         {
-            List<Tankas> zaidejai = (List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"];
-            zaidejai.Find(z => z._id == id).updated = true;
+            List<Transportas> zaidejai = (List<Transportas>)System.Web.HttpContext.Current.Application["zaidejai"];
+            zaidejai.Find(z => z.getId() == id).updated = true;
             System.Web.HttpContext.Current.Application.Lock();
             System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
             System.Web.HttpContext.Current.Application.UnLock();
 
-            return Json(zaidejai.FindAll(z => z._id != id), JsonRequestBehavior.AllowGet);
+            return Json(zaidejai.FindAll(z => z.getId() != id), JsonRequestBehavior.AllowGet);
         }
 
         [System.Web.Http.HttpPost]
-        public ActionResult Connect([FromBody] Models.Tankas value)
+        public ActionResult Connect([FromBody] Transportas value)
         {
             string id = GenerateRandomID(24);
-            value._id = id;
+            value.setId(id);
             value.updated = false;
 
-            List<Tankas> zaidejai = (List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"] ?? new List<Tankas>();
+            List<Transportas> zaidejai = (List<Transportas>)System.Web.HttpContext.Current.Application["zaidejai"] ?? new List<Transportas>();
             zaidejai.Add(value);
             System.Web.HttpContext.Current.Application.Lock();
             System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
@@ -50,12 +51,12 @@ namespace TankaiServer.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public ActionResult Disconnect([FromBody] Models.Tankas value)
+        public ActionResult Disconnect([FromBody] Transportas value)
         {
             string msg = "hello";
-            List<Tankas> zaidejai = (List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"];
+            List<Transportas> zaidejai = (List<Transportas>)System.Web.HttpContext.Current.Application["zaidejai"];
 
-            zaidejai.RemoveAll(p => p._id == value._id);
+            zaidejai.RemoveAll(p => p.getId() == value.getId());
 
             System.Web.HttpContext.Current.Application.Lock();
             System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
@@ -64,15 +65,15 @@ namespace TankaiServer.Controllers
         }
 
         [System.Web.Http.HttpPatch]
-        public ActionResult Position([FromBody] Models.Tankas value)
+        public ActionResult Position([FromBody] Transportas value)
         {
             string msg = "hello";
-            List<Tankas> zaidejai = (List<Tankas>)System.Web.HttpContext.Current.Application["zaidejai"];
+            List<Transportas> zaidejai = (List<Transportas>)System.Web.HttpContext.Current.Application["zaidejai"];
 
-            zaidejai.Find(z => z._id == value._id).position = value.position;
+            zaidejai.Find(z => z.getId() == value.getId()).setPos(value.getPos());
             zaidejai.ForEach(z =>
             {
-                if (z._id != value._id)
+                if (z.getId() != value.getId())
                 {
                     z.updated = false;
                 }

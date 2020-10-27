@@ -13,10 +13,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
-using TanksRework.Classes;
-using TanksRework.Classes.Observer;
+using Classes;
+using Classes.Observer;
 
 namespace TanksRework
 {
@@ -32,6 +33,11 @@ namespace TanksRework
         static HttpClient client = new HttpClient();
         IRestClient restas = new RestClient();
 
+        JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
+        {
+            TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All,
+            NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
+        };
 
         private string getUrl = "https://localhost:44356/tankas/details/";
         private string getEnemies = "https://localhost:44356/tankas/detailsofother/";
@@ -334,9 +340,17 @@ namespace TanksRework
         //Nuskaitom visus esamus priesus
         private void button6_Click(object sender, EventArgs e)
         {
+            restas.UseNewtonsoftJson();
             IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetEnemyList/" + playeris.getId());
             restRequest.AddHeader("Accept", "application/json");
             IRestResponse<List<Transportas>> restResponse = restas.Get<List<Transportas>>(restRequest);
+
+            var priesai = JsonConvert.DeserializeObject<List<Transportas>>(restResponse.Content, serializerSettings);
+            priesai.ForEach(p =>
+            {
+                playeris.prideti(p);
+            });
+            label1.Text = restResponse.Content;
 
             if (restResponse.IsSuccessful)
             {
@@ -346,10 +360,11 @@ namespace TanksRework
                 {
                     playeris.prideti(p);
                 });
+                label1.Text = priesai[0].ToString();
             }
             else
             {
-                // label1.Text = restResponse.ErrorMessage;
+                //label1.Text = restResponse.ErrorMessage;
             }
         }
 
@@ -392,14 +407,19 @@ namespace TanksRework
                     Resource = "https://localhost:44356/Tankas/Connect/"
                 };
 
+                var test = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
+
                 request.AddHeader("Content-Type", "application/json");
                 request.AddHeader("Accept", "application/xml");
-                request.AddJsonBody(playeris);
+                //request.AddJsonBody(test);
+                request.AddParameter("application/json", test, ParameterType.RequestBody);
 
                 IRestResponse<string> response = restas.Post<string>(request);
                 playeris.setId(response.Data);// = response.Data;
                 //zaidejas._id = playerId;
-                label2.Text = playeris.getId();
+                //label2.Text = test;
+                richTextBox1.Text = test;
+                //label1.Text = JsonConvert.DeserializeObject<Transportas>(test, serializerSettings).getId();
                 //DisplayPlayer(100, 100);
             }
         }
