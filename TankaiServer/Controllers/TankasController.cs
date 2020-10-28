@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using TankaiServer.Models;
 using Classes;
+using Newtonsoft.Json;
 
 namespace TankaiServer.Controllers
 {
@@ -23,7 +24,7 @@ namespace TankaiServer.Controllers
         }
 
         [System.Web.Http.HttpGet]
-        public JsonResult GetEnemyList(string id)
+        public string GetEnemyList(string id)
         {
             List<Transportas> zaidejai = (List<Transportas>)System.Web.HttpContext.Current.Application["zaidejai"];
             zaidejai.Find(z => z.getId() == id).updated = true;
@@ -31,7 +32,13 @@ namespace TankaiServer.Controllers
             System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
             System.Web.HttpContext.Current.Application.UnLock();
 
-            return Json(zaidejai.FindAll(z => z.getId() != id), JsonRequestBehavior.AllowGet);
+            var test = JsonConvert.SerializeObject(zaidejai.FindAll(z => z.getId() != id), Formatting.Indented, new JsonSerializerSettings()
+            {
+                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
+            });
+
+            return test;
         }
 
         [System.Web.Http.HttpPost]

@@ -8,6 +8,8 @@ namespace TanksRework
 {
     static class Program
     {
+        private static Form1 _instance;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -17,7 +19,8 @@ namespace TanksRework
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Form1 Instance = _instance ?? (_instance = new Form1());
+            Application.Run(Instance);
         }
     }
 }

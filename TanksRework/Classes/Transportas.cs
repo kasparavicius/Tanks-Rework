@@ -20,13 +20,31 @@ namespace Classes
         [JsonProperty]
         private int damage { get; set; }
         [JsonProperty]
-        private int[] position { get; set; }
-        public Transportas(String nam, int hp, int dmg, int[] pos)
+        public int positionx { get; set; }
+        [JsonProperty]
+        public int positiony { get; set; }
+        [JsonProperty]
+        public int type { get; set; }
+        public Transportas(String nam, int hp, int dmg, int posx, int posy)
         {
             name = nam;
             healthPoints = hp;
             damage = dmg;
-            position = pos;
+            positionx = posx;
+            positiony = posy;
+        }
+        public Transportas(string id, String nam, int hp, int dmg, int posx, int posy)
+        {
+            _id = id;
+            name = nam;
+            healthPoints = hp;
+            damage = dmg;
+            positionx = posx;
+            positiony = posy;
+        }
+        public Transportas()
+        {
+
         }
 
         public string getId()
@@ -41,7 +59,8 @@ namespace Classes
         void IObserver.atnaujinti(List<Transportas> updPriesai)
         {
             //Atnaujint info (pos = new pos)
-            position = updPriesai.Find(p => p.getId() == _id).position;
+            positionx = updPriesai.Find(p => p.getId() == _id).positionx;
+            positiony = updPriesai.Find(p => p.getId() == _id).positiony;
         }
     }
 }

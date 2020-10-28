@@ -219,6 +219,7 @@
     <Compile Include="Classes\LektuvasTransportas.cs" />
     <Compile Include="Classes\TankasTransportas.cs" />
     <Compile Include="Classes\Transportas.cs" />
+    <Compile Include="Classes\TransportasFactory.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TankasController.cs" />
     <Compile Include="Controllers\TransportasController.cs" />

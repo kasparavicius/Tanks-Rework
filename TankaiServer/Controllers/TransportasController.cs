@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Classes;
+using Antlr.Runtime.Tree;
 
 namespace TankaiServer.Controllers
 {
@@ -22,13 +23,14 @@ namespace TankaiServer.Controllers
         // GET: api/Transportas/5
         public string Get(string id)
         {
-            return id+ "got";
+            return id + "got";
         }
 
         // POST: api/Transportas
         [System.Web.Http.HttpPost]
         public string Post([FromBody] Transportas value)
         {
+            //Transportas trp = JsonConvert.DeserializeObject<Transportas>(value);
             string id = GenerateRandomID(24);
             value.setId(id);
             value.updated = false;

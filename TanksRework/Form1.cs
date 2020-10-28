@@ -37,7 +37,7 @@ namespace TanksRework
         {
             TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All,
             NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
-        };
+    };
 
         private string getUrl = "https://localhost:44356/tankas/details/";
         private string getEnemies = "https://localhost:44356/tankas/detailsofother/";
@@ -53,13 +53,13 @@ namespace TanksRework
         {
             this.ControlBox = false;
             InitializeComponent();
-            dataGridView1.RowCount = 18;
+            dataGridView1.RowCount = 15;
             dataGridView1.ColumnCount = 25;
 
             timer1.Interval = 500;
             timer1.Start();
 
-            TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, new int[] { 5, 5 });
+            TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, 5, 5 );
 
             //zaidejas.atnaujinti("la");
             //Transportas priesas = new TransportasFactory().CreateTransportas(1, "nuva");
@@ -245,7 +245,7 @@ namespace TanksRework
             IRestResponse response = restClient.Delete(request);
         }
 
-        private void DisplayPlayer(int senasx, int senasy)
+        private void DisplayPlayer()
         {
 
             Bitmap img = (Bitmap) Bitmap.FromFile("assets\\tankas2d.png");
@@ -253,14 +253,17 @@ namespace TanksRework
             DataGridViewImageCell icell = new DataGridViewImageCell();
             icell.Value = newImage;
             string empty = "";
-            
-            if (senasx < 100 && senasy < 100)
-            {
-                dataGridView1[senasx, senasy].Value = new Bitmap(1, 1);
 
-                dataGridView1[zaidejas.pozicija[0], zaidejas.pozicija[1]] = icell;
-            }
-            else dataGridView1[zaidejas.pozicija[0], zaidejas.pozicija[1]] = icell;
+            //if (senasx < 100 && senasy < 100)
+            //{
+            //dataGridView1[senasx, senasy].Value = new Bitmap(1, 1);
+            dataGridView1.DataSource = null;
+            dataGridView1.Refresh();
+
+                dataGridView1[playeris.positionx, playeris.positiony] = icell;
+            //}
+            //else 
+                //dataGridView1[playeris.positionx, playeris.positiony] = icell;
 
         }
 
@@ -288,7 +291,7 @@ namespace TanksRework
             {
                 zaidejas.pozicija[1] -= 1;
                 updatePlayerDetails();
-                DisplayPlayer(senasx, senasy);
+                //DisplayPlayer(senasx, senasy);
             }
             
         }
@@ -301,7 +304,7 @@ namespace TanksRework
             {
                 zaidejas.pozicija[0] -= 1;
                 updatePlayerDetails();
-                DisplayPlayer(senasx, senasy);
+                //DisplayPlayer(senasx, senasy);
             }
             
         }
@@ -314,7 +317,7 @@ namespace TanksRework
             {
                 zaidejas.pozicija[0] += 1;
                 updatePlayerDetails();
-                DisplayPlayer(senasx, senasy);
+                //DisplayPlayer(senasx, senasy);
             }
             
         }
@@ -327,7 +330,7 @@ namespace TanksRework
             {
                 zaidejas.pozicija[1] += 1;
                 updatePlayerDetails();
-                DisplayPlayer(senasx, senasy);
+                //DisplayPlayer(senasx, senasy);
             }
             
         }
@@ -345,7 +348,11 @@ namespace TanksRework
             restRequest.AddHeader("Accept", "application/json");
             IRestResponse<List<Transportas>> restResponse = restas.Get<List<Transportas>>(restRequest);
 
+            restResponse.Content = restResponse.Content.Replace("TankaiServer", "TanksRework");
+
             var priesai = JsonConvert.DeserializeObject<List<Transportas>>(restResponse.Content, serializerSettings);
+            playeris.observers = new List<IObserver>();
+            var priesopos = restResponse.Content[0];
             priesai.ForEach(p =>
             {
                 playeris.prideti(p);
@@ -366,6 +373,8 @@ namespace TanksRework
             {
                 //label1.Text = restResponse.ErrorMessage;
             }
+
+            
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -397,7 +406,7 @@ namespace TanksRework
                 zaidejas.pozicija[0] = rnd.Next(1, 15);
                 zaidejas.pozicija[1] = rnd.Next(1, 15);*/
 
-                playeris = new TransportasFactory().CreateTransportas(1, textBox2.Text);
+                playeris = new TransportasFactory().CreateTransportas(comboBox1.SelectedIndex+1, textBox2.Text);
 
                 restas.UseNewtonsoftJson();
 
@@ -416,11 +425,13 @@ namespace TanksRework
 
                 IRestResponse<string> response = restas.Post<string>(request);
                 playeris.setId(response.Data);// = response.Data;
-                //zaidejas._id = playerId;
-                //label2.Text = test;
-                richTextBox1.Text = test;
+                                              //zaidejas._id = playerId;
+                                              //label2.Text = test;
+                richTextBox1.Text = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
                 //label1.Text = JsonConvert.DeserializeObject<Transportas>(test, serializerSettings).getId();
                 //DisplayPlayer(100, 100);
+
+                DisplayPlayer();
             }
         }
 

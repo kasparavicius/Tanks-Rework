@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Classes;
 
 namespace TankaiServer
 {
@@ -28,6 +29,8 @@ namespace TankaiServer
                 TypeNameHandling = TypeNameHandling.All,
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
+
+            ModelBinders.Binders.Add(new KeyValuePair<Type, IModelBinder>(typeof(Transportas), new TransportasBinder()));
         }
     }
 }

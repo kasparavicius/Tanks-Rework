@@ -6,7 +6,7 @@ namespace Classes.Observer
 {
 	public abstract class Subject
 	{
-		private List<IObserver> observers;
+		public List<IObserver> observers;
 
 		public void pranesti(List<Transportas> priesai)//POSTina savo pos ir serveri, mainais gauna priesu pos ir updeitina.
 		{
