@@ -5,6 +5,7 @@ using Classes.Observer;
 using RestSharp.Serializers.NewtonsoftJson;
 using RestSharp;
 using Newtonsoft.Json;
+using TanksRework.Classes.Strategy;
 
 namespace Classes
 {
@@ -25,6 +26,10 @@ namespace Classes
         public int positiony { get; set; }
         [JsonProperty]
         public int type { get; set; }
+        [JsonProperty]
+        public IJudejimas _strategy { get; set; }
+
+
         public Transportas(String nam, int hp, int dmg, int posx, int posy)
         {
             name = nam;
@@ -61,6 +66,39 @@ namespace Classes
             //Atnaujint info (pos = new pos)
             positionx = updPriesai.Find(p => p.getId() == _id).positionx;
             positiony = updPriesai.Find(p => p.getId() == _id).positiony;
+        }
+
+        public void SetStrategy()
+        {
+            switch (this.type)
+            {
+
+                case 1:
+                    {
+                        this._strategy = new Skristi();
+                        break;
+                    }
+                case 2:
+                    {
+                        this._strategy = new Vaziuoti();
+                        break;
+                    }
+                case 3:
+                    {
+                        this._strategy = new Plaukti();
+                        break;
+                    }
+                default:
+                    this._strategy = new Vaziuoti();
+                    break;
+            }
+        }
+
+        public void Move(int x, int y)
+        {
+            var positions = _strategy.Move(x, y, this.positionx, this.positiony);
+            this.positionx = positions.Item1;
+            this.positiony = positions.Item2;
         }
     }
 }
