@@ -215,6 +215,19 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Classes\AbstractFactory\AbstractCunamis.cs" />
+    <Compile Include="Classes\AbstractFactory\AbstractDrebejimas.cs" />
+    <Compile Include="Classes\AbstractFactory\AbstractTornadas.cs" />
+    <Compile Include="Classes\AbstractFactory\BigCunamis.cs" />
+    <Compile Include="Classes\AbstractFactory\BigDrebejimas.cs" />
+    <Compile Include="Classes\AbstractFactory\BigTornadas.cs" />
+    <Compile Include="Classes\AbstractFactory\CunamisFactory.cs" />
+    <Compile Include="Classes\AbstractFactory\DrebejimasFactory.cs" />
+    <Compile Include="Classes\AbstractFactory\SmallCunamis.cs" />
+    <Compile Include="Classes\AbstractFactory\SmallDrebejimas.cs" />
+    <Compile Include="Classes\AbstractFactory\SmallTornadas.cs" />
+    <Compile Include="Classes\AbstractFactory\StichijosFactory.cs" />
+    <Compile Include="Classes\AbstractFactory\TornadasFactory.cs" />
     <Compile Include="Classes\LaivasTransportas.cs" />
     <Compile Include="Classes\LektuvasTransportas.cs" />
     <Compile Include="Classes\TankasTransportas.cs" />
@@ -228,6 +241,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\MongoHelper.cs" />
+    <Compile Include="Models\Stichija.cs" />
     <Compile Include="Models\Tankas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
