@@ -108,11 +108,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Fartas\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\Windows\\.nuget\\packages\\": {}
+>>>>>>> 4193b2893a66eb24af1b755bebc676345586cbcd
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "E:\\TankaiRework\\TanksRework\\TanksRework.csproj",
       "projectName": "TanksRework",
       "projectPath": "E:\\TankaiRework\\TanksRework\\TanksRework.csproj",
@@ -121,6 +126,16 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Fartas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+      "projectUniqueName": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
+      "projectName": "TanksRework",
+      "projectPath": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
+      "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Windows\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> 4193b2893a66eb24af1b755bebc676345586cbcd
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
