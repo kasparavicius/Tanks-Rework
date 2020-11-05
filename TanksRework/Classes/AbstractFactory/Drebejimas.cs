@@ -10,7 +10,7 @@ using TanksRework.Classes.Strategy;
 namespace TanksRework.Classes.AbstractFactory
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public abstract class AbstractDrebejimas
+    public abstract class Drebejimas
     {
         [JsonProperty]
         private string _id { get; set; }
@@ -24,20 +24,20 @@ namespace TanksRework.Classes.AbstractFactory
         public int type { get; set; }
 
 
-        public AbstractDrebejimas(int dmg, int posx, int posy)
+        public Drebejimas(int dmg, int posx, int posy)
         {
             damage = dmg;
             positionx = posx;
             positiony = posy;
         }
-        public AbstractDrebejimas(string id, int dmg, int posx, int posy)
+        public Drebejimas(string id, int dmg, int posx, int posy)
         {
             _id = id;
             damage = dmg;
             positionx = posx;
             positiony = posy;
         }
-        public AbstractDrebejimas()
+        public Drebejimas()
         {
 
         }
@@ -48,6 +48,10 @@ namespace TanksRework.Classes.AbstractFactory
         public void setId(string id)
         {
             _id = id;
+        }
+        public Drebejimas Clone()
+        {
+            return (Drebejimas)this.MemberwiseClone();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TanksRework.Classes.AbstractFactory
 {
-    class BigDrebejimas : AbstractDrebejimas
+    class BigDrebejimas : Drebejimas
     {
         public BigDrebejimas(int dmg, int posx, int posy) : base(dmg, posx, posy)
         {

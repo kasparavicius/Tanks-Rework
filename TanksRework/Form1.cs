@@ -18,6 +18,7 @@ using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 using Classes;
 using Classes.Observer;
+using TanksRework.Classes.AbstractFactory;
 
 namespace TanksRework
 {
@@ -58,6 +59,10 @@ namespace TanksRework
 
             timer1.Interval = 500;
             timer1.Start();
+
+            //Load stichijos
+            StichijosCache Stichijos = new StichijosCache();
+            Stichijos.loadCache();
 
             TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, 5, 5 );
 

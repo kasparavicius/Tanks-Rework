@@ -11,8 +11,8 @@ namespace TanksRework.Classes.AbstractFactory
 {
     public abstract class StichijosFactory
     {
-        public void CreateEvent();
-        //AbstractTornadas CreateEvent(1);
-        //AbstractDrebejimas CreateEvent();
+        public abstract Tornadas CreateTornadas();
+        public abstract Cunamis CreateCunamis();
+        public abstract Drebejimas CreateDrebejimas();
     }
 }

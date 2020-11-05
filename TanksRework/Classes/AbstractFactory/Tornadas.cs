@@ -10,7 +10,7 @@ using TanksRework.Classes.Strategy;
 namespace TanksRework.Classes.AbstractFactory
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public abstract class AbstractCunamis
+    public abstract class Tornadas
     {
         [JsonProperty]
         private string _id { get; set; }
@@ -24,20 +24,20 @@ namespace TanksRework.Classes.AbstractFactory
         public int type { get; set; }
 
 
-        public AbstractCunamis(int dmg, int posx, int posy)
+        public Tornadas(int dmg, int posx, int posy)
         {
             damage = dmg;
             positionx = posx;
             positiony = posy;
         }
-        public AbstractCunamis(string id, int dmg, int posx, int posy)
+        public Tornadas(string id, int dmg, int posx, int posy)
         {
             _id = id;
             damage = dmg;
             positionx = posx;
             positiony = posy;
         }
-        public AbstractCunamis()
+        public Tornadas()
         {
 
         }
@@ -48,6 +48,10 @@ namespace TanksRework.Classes.AbstractFactory
         public void setId(string id)
         {
             _id = id;
+        }
+        public Tornadas Clone()
+        {
+            return (Tornadas)this.MemberwiseClone();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TanksRework.Classes.AbstractFactory
 {
-    class BigCunamis : AbstractCunamis
+    class BigCunamis : Cunamis
     {
         public BigCunamis(int dmg, int posx, int posy) : base(dmg, posx, posy)
         {

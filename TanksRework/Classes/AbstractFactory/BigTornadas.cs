@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TanksRework.Classes.AbstractFactory
 {
-    class BigTornadas : AbstractTornadas
+    class BigTornadas : Tornadas
     {
         public BigTornadas(int dmg, int posx, int posy) : base(dmg, posx, posy)
         {
