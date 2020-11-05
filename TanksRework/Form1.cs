@@ -285,42 +285,18 @@ namespace TanksRework
         // up
         private void button3_Click(object sender, EventArgs e)
         {
-            //int senasx = zaidejas.pozicija[0];
-            //int senasy = zaidejas.pozicija[1];
-           // if (senasy > 0)
-            //{
-                playeris.Move(0, -1);
-                updatePlayerDetails();
-                //DisplayPlayer(senasx, senasy);
-            //}
-            
+            playeris.Move(0, -1);
+            updatePlayerDetails();
         }
         //left
         private void button2_Click(object sender, EventArgs e)
         {
-            //int senasx = zaidejas.pozicija[0];
-            //int senasy = zaidejas.pozicija[1];
-            //if (zaidejas.pozicija[0] > 0)
-            //{
-            //    zaidejas.pozicija[0] -= 1;
-            //    updatePlayerDetails();
-            //    //DisplayPlayer(senasx, senasy);
-            //}
-
             playeris.Move(-1, 0);
             updatePlayerDetails();
         }
         //right
         private void button1_Click(object sender, EventArgs e)
         {
-            //int senasx = zaidejas.pozicija[0];
-            //int senasy = zaidejas.pozicija[1];
-            //if (senasx < 24)
-            //{
-            //    zaidejas.pozicija[0] += 1;
-            //    updatePlayerDetails();
-            //    //DisplayPlayer(senasx, senasy);
-            //}
             playeris.Move(1, 0);
             updatePlayerDetails();
             
@@ -328,18 +304,8 @@ namespace TanksRework
         //down
         private void button4_Click(object sender, EventArgs e)
         {
-            //int senasx = zaidejas.pozicija[0];
-            //int senasy = zaidejas.pozicija[1];
-            //if (senasy < 17)
-            //{
-            //    zaidejas.pozicija[1] += 1;
-            //    updatePlayerDetails();
-            //    //DisplayPlayer(senasx, senasy);
-            //}
-
             playeris.Move(0, 1);
             updatePlayerDetails();
-            
         }
 
         private void label1_Click(object sender, EventArgs e)

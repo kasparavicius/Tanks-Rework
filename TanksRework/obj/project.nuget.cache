@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "GexQDqsY5awLeXjLbYvyyMzOdh++h5SkRC21Y9IKcqDeCfsY9/d1FruiqjPiDR8Ao81ts+B3mQNhkzkeU5+6WA==",
+  "dgSpecHash": "IeTCXxcSPiqfxQeE+7Vlxu8GeBzYGye3iQVdKAOM2yjt6JSdOnR3F9VZ69L4OXXEnLkeKJ9G3ZxVqxwokDZp+Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
+  "projectFilePath": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ugnius\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\Ugnius\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
-    "C:\\Users\\Ugnius\\.nuget\\packages\\restsharp.serializers.newtonsoftjson\\106.11.7\\restsharp.serializers.newtonsoftjson.106.11.7.nupkg.sha512"
+    "C:\\Users\\Windows\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Windows\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
+    "C:\\Users\\Windows\\.nuget\\packages\\restsharp.serializers.newtonsoftjson\\106.11.7\\restsharp.serializers.newtonsoftjson.106.11.7.nupkg.sha512"
   ],
   "logs": []
 }

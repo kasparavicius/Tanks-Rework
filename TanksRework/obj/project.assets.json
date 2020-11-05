@@ -108,23 +108,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ugnius\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Windows\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
+      "projectUniqueName": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
       "projectName": "TanksRework",
-      "projectPath": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
-      "packagesPath": "C:\\Users\\Ugnius\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\obj\\",
+      "projectPath": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
+      "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Ugnius\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Windows\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -179,7 +175,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
