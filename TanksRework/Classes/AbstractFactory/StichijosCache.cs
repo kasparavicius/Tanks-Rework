@@ -52,12 +52,16 @@ namespace TanksRework.Classes.AbstractFactory
             BigFactory bigFactory = new BigFactory();
             SmallFactory smallFactory = new SmallFactory();
 
+            cunamiai = new Hashtable();
+            tornadai = new Hashtable();
+            drebejimai = new Hashtable();
+
             Cunamis bCunamis = sukurtiCunami(bigFactory);
             bCunamis.setId("1");
             cunamiai.Add(bCunamis.getId(), bCunamis);
 
             Cunamis sCunamis = sukurtiCunami(smallFactory);
-            bCunamis.setId("2");
+            sCunamis.setId("2");
             cunamiai.Add(sCunamis.getId(), sCunamis);
 
             Tornadas bTornadas = sukurtiTornada(bigFactory);

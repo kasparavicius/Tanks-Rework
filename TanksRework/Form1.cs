@@ -19,6 +19,7 @@ using RestSharp.Serializers.NewtonsoftJson;
 using Classes;
 using Classes.Observer;
 using TanksRework.Classes.AbstractFactory;
+using TankaiRework.ER;
 
 namespace TanksRework
 {
@@ -63,6 +64,31 @@ namespace TanksRework
             //Load stichijos
             StichijosCache Stichijos = new StichijosCache();
             Stichijos.loadCache();
+
+            //Kulkos test
+            Ginklas ginklas = new Ginklas(10, 10);
+            /*richTextBox1.Text = 
+                $"Simple zala {ginklas.ZalaSimple()}\n" +
+                $"Fire zala {ginklas.ZalaFire()}\n" +
+                $"Explosive zala {ginklas.ZalaExplosive()}\n" +
+                $"Both zala {ginklas.ZalaFireAndExplosive()}\n";*/
+            richTextBox1.Text = $"Simple zala {ginklas.GetZala()}\n";
+            ginklas.AddPowerUp(1);
+            richTextBox1.Text += $"Fire zala {ginklas.GetZala()}\n";
+            ginklas.RemovePowerUps();
+            ginklas.AddPowerUp(2);
+            richTextBox1.Text += $"Explosion zala {ginklas.GetZala()}\n";
+            ginklas.AddPowerUp(1);
+            richTextBox1.Text += $"Both zala {ginklas.GetZala()}\n";
+            ginklas.RemovePowerUps();
+            ginklas.AddPowerUp(1);
+            ginklas.AddPowerUp(1);
+            richTextBox1.Text += $"Double fire zala {ginklas.GetZala()}\n";
+            ginklas.RemovePowerUps();
+            ginklas.AddPowerUp(1);
+            ginklas.AddPowerUp(1);
+            ginklas.AddPowerUp(2);
+            richTextBox1.Text += $"Double fire + explosion zala {ginklas.GetZala()}\n";
 
             TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, 5, 5 );
 
