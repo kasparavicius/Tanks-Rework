@@ -20,6 +20,8 @@ using Classes;
 using Classes.Observer;
 using TanksRework.Classes.AbstractFactory;
 using TankaiRework.ER;
+using System.Drawing.Text;
+using TankaiRework.Commander;
 
 namespace TanksRework
 {
@@ -32,6 +34,10 @@ namespace TanksRework
         Transportas playeris;// = new TransportasFactory().CreateTransportas(1, "nuva");
         List<Transportas> priesai;
 
+        //Commander initialize
+        //private ICommand command;
+        private List<ICommand> commandsStack;
+
         static HttpClient client = new HttpClient();
         IRestClient restas = new RestClient();
 
@@ -39,7 +45,7 @@ namespace TanksRework
         {
             TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All,
             NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
-    };
+        };
 
         private string getUrl = "https://localhost:44356/tankas/details/";
         private string getEnemies = "https://localhost:44356/tankas/detailsofother/";
@@ -58,7 +64,10 @@ namespace TanksRework
             dataGridView1.RowCount = 15;
             dataGridView1.ColumnCount = 25;
 
-            timer1.Interval = 500;
+            commandsStack = new List<ICommand>();
+
+
+            timer1.Interval = 100;
             timer1.Start();
 
             //Load stichijos
@@ -89,6 +98,7 @@ namespace TanksRework
             ginklas.AddPowerUp(1);
             ginklas.AddPowerUp(2);
             richTextBox1.Text += $"Double fire + explosion zala {ginklas.GetZala()}\n";
+
 
             TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, 5, 5 );
 
@@ -136,6 +146,9 @@ namespace TanksRework
             ////zaidejas._id = playerId;
             //label2.Text = zaidejas._id;
             //DisplayPlayer(100, 100);
+
+            this.KeyPress +=
+                new KeyPressEventHandler(Form1_KeyPress);
 
         }
 
@@ -208,7 +221,7 @@ namespace TanksRework
         private void updatePlayerDetails()
         {
             //updateEnemiesDetails();
-            IRestClient restClient = new RestClient();
+            /*IRestClient restClient = new RestClient();
             IRestRequest request = new RestRequest()
             {
                 Resource = locationUrl + "/" + zaidejas._id
@@ -219,7 +232,8 @@ namespace TanksRework
             //request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(zaidejas);
 
-            IRestResponse response = restClient.Patch(request);
+            IRestResponse response = restClient.Patch(request);*/
+            richTextBox1.Text = $"Naujos koord = {playeris.positionx}, {playeris.positiony}\n";
         }
 
         private void updateEnemiesDetails()
@@ -316,26 +330,26 @@ namespace TanksRework
         // up
         private void button3_Click(object sender, EventArgs e)
         {
-            playeris.Move(0, -1);
+            commandsStack.Add(new MoveUp(playeris));
             updatePlayerDetails();
         }
         //left
         private void button2_Click(object sender, EventArgs e)
         {
-            playeris.Move(-1, 0);
+            commandsStack.Add(new MoveLeft(playeris));
             updatePlayerDetails();
         }
         //right
         private void button1_Click(object sender, EventArgs e)
         {
-            playeris.Move(1, 0);
+            commandsStack.Add(new MoveRight(playeris));
             updatePlayerDetails();
             
         }
         //down
         private void button4_Click(object sender, EventArgs e)
         {
-            playeris.Move(0, 1);
+            commandsStack.Add(new MoveDown(playeris));
             updatePlayerDetails();
         }
 
@@ -412,7 +426,6 @@ namespace TanksRework
 
                 playeris = new TransportasFactory().CreateTransportas(comboBox1.SelectedIndex+1, textBox2.Text);
 
-                playeris.SetStrategy();
                 restas.UseNewtonsoftJson();
 
                 //Postas
@@ -442,21 +455,74 @@ namespace TanksRework
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-         /*   //TO-DO: Get changes from server
-            IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetEnemyList/" + playeris.getId());
-            restRequest.AddHeader("Accept", "application/json");
-            IRestResponse<List<Transportas>> restResponse = restas.Get<List<Transportas>>(restRequest);
+            /*   //TO-DO: Get changes from server
+               IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetEnemyList/" + playeris.getId());
+               restRequest.AddHeader("Accept", "application/json");
+               IRestResponse<List<Transportas>> restResponse = restas.Get<List<Transportas>>(restRequest);
 
-            if (restResponse.IsSuccessful)
+               if (restResponse.IsSuccessful)
+               {
+                   //return restResponse.Data;
+                   //priesai = restResponse.Data;
+                   playeris.pranesti(restResponse.Data);
+               }
+               else
+               {
+                   // label1.Text = restResponse.ErrorMessage;
+               }*/
+
+            commandsStack.ForEach(k =>
             {
-                //return restResponse.Data;
-                //priesai = restResponse.Data;
-                playeris.pranesti(restResponse.Data);
-            }
-            else
+                k.Execute();
+            });
+            commandsStack.Clear();
+        }
+
+        void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            /*if (e.KeyChar >= 48 && e.KeyChar <= 57)
             {
-                // label1.Text = restResponse.ErrorMessage;
+                MessageBox.Show($"Form.KeyPress: '{e.KeyChar}' pressed.");
+
+                switch (e.KeyChar)
+                {
+                    case (char)49:
+                    case (char)52:
+                    case (char)55:
+                        MessageBox.Show($"Form.KeyPress: '{e.KeyChar}' consumed.");
+                        e.Handled = true;
+                        break;
+                }
             }*/
+
+            //
+            if ((Char.ToLower(e.KeyChar) == Char.ToLower((char)Keys.W) || Char.ToLower(e.KeyChar) == Char.ToLower((char)Keys.S) ||
+                Char.ToLower(e.KeyChar) == Char.ToLower((char)Keys.A) || Char.ToLower(e.KeyChar) == Char.ToLower((char)Keys.D)) && !(playeris is null))
+            {
+                //MessageBox.Show($"Blet primaigei nesamoniu");
+                //e.Handled = true;
+
+                switch (Char.ToLower(e.KeyChar))
+                {
+                    case 'w':
+                        commandsStack.Add(new MoveUp(playeris));
+                        break;
+                    case 's':
+                        commandsStack.Add(new MoveDown(playeris));
+                        break;
+                    case 'a':
+                        commandsStack.Add(new MoveLeft(playeris));
+                        break;
+                    case 'd':
+                        commandsStack.Add(new MoveRight(playeris));
+                        break;
+                    default:
+                        break;
+                }
+                //command.Execute();
+                updatePlayerDetails();
+            }
+
         }
     }
 }

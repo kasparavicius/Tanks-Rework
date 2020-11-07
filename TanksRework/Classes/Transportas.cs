@@ -68,7 +68,7 @@ namespace Classes
             positiony = updPriesai.Find(p => p.getId() == _id).positiony;
         }
 
-        public void SetStrategy()
+        /*public void SetStrategy()
         {
             switch (this.type)
             {
@@ -92,7 +92,7 @@ namespace Classes
                     this._strategy = new Vaziuoti();
                     break;
             }
-        }
+        }*/
 
         public void Move(int x, int y)
         {
