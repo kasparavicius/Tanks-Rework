@@ -1,19 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "aJKrBNgOVh+lkv+BwtfWQCPeNcR4P78Qj51yhriqDWKfGiCq4gLDnUlymjToduiEltRgo0Quaw0FWqNGm3ltVg==",
+  "dgSpecHash": "GexQDqsY5awLeXjLbYvyyMzOdh++h5SkRC21Y9IKcqDeCfsY9/d1FruiqjPiDR8Ao81ts+B3mQNhkzkeU5+6WA==",
   "success": true,
-  "projectFilePath": "E:\\TankaiRework\\TanksRework\\TanksRework.csproj",
+  "projectFilePath": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Fartas\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\Fartas\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
-    "C:\\Users\\Fartas\\.nuget\\packages\\restsharp.serializers.newtonsoftjson\\106.11.7\\restsharp.serializers.newtonsoftjson.106.11.7.nupkg.sha512"
+    "C:\\Users\\Ugnius\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Ugnius\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
+    "C:\\Users\\Ugnius\\.nuget\\packages\\restsharp.serializers.newtonsoftjson\\106.11.7\\restsharp.serializers.newtonsoftjson.106.11.7.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file E:\\TankaiRework\\TanksRework\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

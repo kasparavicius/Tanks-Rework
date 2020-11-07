@@ -12,6 +12,17 @@ namespace TanksRework.Classes.Zemelapis
 
         public Langelis[,] langeliai { get; set; }
 
+        private Director director = new Director();
+
+        public Zemelapis()
+        {
+            IBuilder b1 = new ObstacleBuilder();
+
+            director.Construct(b1);
+
+            langeliai = b1.GetResult();
+        }
+
 
     }
 }

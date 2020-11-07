@@ -4,13 +4,11 @@ using System.Text;
 
 namespace TanksRework.Classes.Zemelapis
 {
-    public enum LangelioTipas
+    class Director
     {
-        Zeme,
-        Vanduo,
-        Siena,
-        Krumas,
-        Powerup
+        public void Construct(IBuilder builder)
+        {
+            builder.StartBuild();
+        }
     }
 }
- 
