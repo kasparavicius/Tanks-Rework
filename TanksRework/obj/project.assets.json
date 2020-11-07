@@ -108,19 +108,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Fartas\\.nuget\\packages\\": {}
+    "C:\\Users\\Windows\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\TankaiRework\\TanksRework\\TanksRework.csproj",
+      "projectUniqueName": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
       "projectName": "TanksRework",
-      "projectPath": "E:\\TankaiRework\\TanksRework\\TanksRework.csproj",
-      "packagesPath": "C:\\Users\\Fartas\\.nuget\\packages\\",
-      "outputPath": "E:\\TankaiRework\\TanksRework\\obj\\",
+      "projectPath": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
+      "packagesPath": "C:\\Users\\Windows\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Windows\\Desktop\\Programavimas\\Tanks-Rework\\TanksRework\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Fartas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Windows\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -178,13 +178,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file E:\\TankaiRework\\TanksRework\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
