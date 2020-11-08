@@ -12,15 +12,15 @@ namespace TanksRework.Classes.Zemelapis
 
         public Langelis[,] langeliai { get; set; }
 
-        private Director director = new Director();
+        public int[,] matrix { get; set; }
+
 
         public Zemelapis()
         {
-            IBuilder b1 = new ObstacleBuilder();
-
-            director.Construct(b1);
-
-            langeliai = b1.GetResult();
+            sizeX = 15;
+            sizeY = 15;
+            matrix = new int[sizeX, sizeY];
+            langeliai = new Langelis[sizeX, sizeY];
         }
 
 

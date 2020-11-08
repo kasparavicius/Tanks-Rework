@@ -228,6 +228,9 @@
     <Compile Include="Classes\AbstractFactory\SmallTornadas.cs" />
     <Compile Include="Classes\AbstractFactory\StichijosFactory.cs" />
     <Compile Include="Classes\AbstractFactory\TornadasFactory.cs" />
+    <Compile Include="Classes\Builder\Director.cs" />
+    <Compile Include="Classes\Builder\IBuilder.cs" />
+    <Compile Include="Classes\Builder\ObstacleBuilder.cs" />
     <Compile Include="Classes\LaivasTransportas.cs" />
     <Compile Include="Classes\LektuvasTransportas.cs" />
     <Compile Include="Classes\TankasTransportas.cs" />
@@ -237,6 +240,7 @@
     <Compile Include="Controllers\TankasController.cs" />
     <Compile Include="Controllers\TransportasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ZemelapisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

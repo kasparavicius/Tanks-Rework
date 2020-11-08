@@ -22,11 +22,13 @@ using TanksRework.Classes.AbstractFactory;
 using TankaiRework.ER;
 using System.Drawing.Text;
 using TankaiRework.Commander;
+using TanksRework.Classes.Zemelapis;
 
 namespace TanksRework
 {
     public partial class Form1 : Form
     {
+        Zemelapis zemelapis = new Zemelapis();
         List<Player> enemies = new List<Player>();
         List<Player> enemiesold = new List<Player>();
         Player zaidejas = new Player();
@@ -149,6 +151,8 @@ namespace TanksRework
             ////zaidejas._id = playerId;
             //label2.Text = zaidejas._id;
             //DisplayPlayer(100, 100);
+            GetMap();
+            
 
             this.KeyPress +=
                 new KeyPressEventHandler(Form1_KeyPress);
@@ -555,6 +559,19 @@ namespace TanksRework
             }
         }
 
+        public void GetMap()
+        {
+            restas.UseNewtonsoftJson();
+            IRestRequest restRequest = new RestRequest("https://localhost:44356/api/zemelapis/2");
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<int[,]> restResponse = restas.Get<int[,]>(restRequest);
+
+            restResponse.Content = restResponse.Content.Replace("TankaiServer", "TanksRework");
+
+            zemelapis.matrix = JsonConvert.DeserializeObject<int[,]>(restResponse.Content, serializerSettings);
+
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             /*   //TO-DO: Get changes from server
@@ -664,6 +681,33 @@ namespace TanksRework
                 {
                     g.DrawImage(priesasImg, pries.positionx * langelioPlotis + 1, pries.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
                 });
+            }
+            if (playeris != null)
+            {
+
+                for (int i = 0; i < zemelapis.sizeX; i++)
+                {
+                    for (int j = 0; j < zemelapis.sizeY; j++)
+                    {
+                        switch (zemelapis.matrix[i, j])
+                        {
+                            case 1:
+                                g.FillEllipse(Brushes.Green, i * langelioPlotis, j * langelioAukstis, langelioPlotis, langelioAukstis);
+                                break;
+                            case 2:
+                                g.FillEllipse(Brushes.Blue, i * langelioPlotis, j * langelioAukstis, langelioPlotis, langelioAukstis);
+                                break;
+                            case 3:
+                                g.FillEllipse(Brushes.Gray, i * langelioPlotis, j * langelioAukstis, langelioPlotis, langelioAukstis);
+                                break;
+                            case 4:
+                                g.FillEllipse(Brushes.Yellow, i * langelioPlotis, j * langelioAukstis, langelioPlotis, langelioAukstis);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
             }
         }
 

@@ -9,6 +9,7 @@ using System.Web.Routing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Classes;
+using TankaiServer.Controllers;
 
 namespace TankaiServer
 {
@@ -30,7 +31,11 @@ namespace TankaiServer
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
 
+            
             ModelBinders.Binders.Add(new KeyValuePair<Type, IModelBinder>(typeof(Transportas), new TransportasBinder()));
+            ZemelapisController map = new ZemelapisController();
+            map.StartMap();
         }
+
     }
 }
