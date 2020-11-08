@@ -1,6 +1,7 @@
 
 
 using Classes;
+using TanksRework;
 /**
 * @(#) MoveUp.cs
 */
@@ -12,7 +13,7 @@ namespace TankaiRework.Commander
 		
 		public void Execute(  )
 		{
-			this.receiver.Move(0, 1);
+			this.receiver.Move(0, -1);
 		}
 		
 		public MoveUp( Transportas receiver )

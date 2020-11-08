@@ -66,33 +66,8 @@ namespace Classes
             //Atnaujint info (pos = new pos)
             positionx = updPriesai.Find(p => p.getId() == _id).positionx;
             positiony = updPriesai.Find(p => p.getId() == _id).positiony;
+            //if nera tokio id sarase, pridedam prie observeriu?
         }
-
-        /*public void SetStrategy()
-        {
-            switch (this.type)
-            {
-
-                case 1:
-                    {
-                        this._strategy = new Skristi();
-                        break;
-                    }
-                case 2:
-                    {
-                        this._strategy = new Vaziuoti();
-                        break;
-                    }
-                case 3:
-                    {
-                        this._strategy = new Plaukti();
-                        break;
-                    }
-                default:
-                    this._strategy = new Vaziuoti();
-                    break;
-            }
-        }*/
 
         public void Move(int x, int y)
         {

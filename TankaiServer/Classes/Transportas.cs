@@ -82,7 +82,7 @@ namespace Classes
             if (values.GetValue("_id") != null)
             {
                 var _id = (string)values.GetValue("_id").ConvertTo(typeof(string));
-                var updated = (bool)values.GetValue("updated").ConvertTo(typeof(bool));
+                //var updated = (bool)values.GetValue("updated").ConvertTo(typeof(bool));
                 var name = (string)values.GetValue("name").ConvertTo(typeof(string));
                 var healthPoints = (int)values.GetValue("healthPoints").ConvertTo(typeof(int));
                 var damage = (int)values.GetValue("damage").ConvertTo(typeof(int));
@@ -94,14 +94,14 @@ namespace Classes
                 {
                     case 1:
                         {
-                            return (Transportas)new LaivasTransportas(_id, updated, name, healthPoints, damage, positionx, positiony);
+                            return (Transportas)new LaivasTransportas(_id, false, name, healthPoints, damage, positionx, positiony);
                         }
                     case 3:
                         {
-                            return (Transportas)new LektuvasTransportas(_id, updated, name, healthPoints, damage, positionx, positiony);
+                            return (Transportas)new LektuvasTransportas(_id, false, name, healthPoints, damage, positionx, positiony);
                         }
                     default:
-                            return (Transportas)new TankasTransportas(_id, updated, name, healthPoints, damage, positionx, positiony);
+                            return (Transportas)new TankasTransportas(_id, false, name, healthPoints, damage, positionx, positiony);
                 }
             }
             else

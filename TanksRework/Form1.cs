@@ -70,6 +70,9 @@ namespace TanksRework
             timer1.Interval = 100;
             timer1.Start();
 
+            timer2.Interval = 100;
+            timer2.Start();
+
             //Load stichijos
             StichijosCache Stichijos = new StichijosCache();
             Stichijos.loadCache();
@@ -234,17 +237,18 @@ namespace TanksRework
 
             IRestResponse response = restClient.Patch(request);*/
             richTextBox1.Text = $"Naujos koord = {playeris.positionx}, {playeris.positiony}\n";
+            panel1.Invalidate();
         }
 
         private void updateEnemiesDetails()
         {
 
             enemies = getEnemiesDetails(zaidejas._id);
-            DisplayEnemies(enemies, enemiesold);
+            //DisplayEnemies(enemies, enemiesold);
             enemiesold = enemies;
         }
 
-        private void DisplayEnemies(List<Player> naujas, List<Player> senas)
+        /*private void DisplayEnemies(List<Player> naujas, List<Player> senas)
         {
 
             Bitmap img = (Bitmap)Bitmap.FromFile("assets\\tankas2denemy.png");
@@ -269,11 +273,8 @@ namespace TanksRework
 
                 }
 
-            }       
-
-           
-
-        }
+            }  
+        }*/
 
         //Remove on close
         private void removePlayer()
@@ -290,7 +291,7 @@ namespace TanksRework
             IRestResponse response = restClient.Delete(request);
         }
 
-        private void DisplayPlayer()
+        /*private void DisplayPlayer()
         {
 
             Bitmap img = (Bitmap) Bitmap.FromFile("assets\\tankas2d.png");
@@ -310,10 +311,9 @@ namespace TanksRework
             //else 
                 //dataGridView1[playeris.positionx, playeris.positiony] = icell;
 
-        }
+        }*/
 
-        private void dataGridView1_CellFormatting(object sender,
-    DataGridViewCellFormattingEventArgs e)
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             String value = e.Value as string;
             if ((value != null) && value.Equals(e.CellStyle.DataSourceNullValue))
@@ -331,26 +331,26 @@ namespace TanksRework
         private void button3_Click(object sender, EventArgs e)
         {
             commandsStack.Add(new MoveUp(playeris));
-            updatePlayerDetails();
+            //updatePlayerDetails();
         }
         //left
         private void button2_Click(object sender, EventArgs e)
         {
             commandsStack.Add(new MoveLeft(playeris));
-            updatePlayerDetails();
+            //updatePlayerDetails();
         }
         //right
         private void button1_Click(object sender, EventArgs e)
         {
             commandsStack.Add(new MoveRight(playeris));
-            updatePlayerDetails();
+            //updatePlayerDetails();
             
         }
         //down
         private void button4_Click(object sender, EventArgs e)
         {
             commandsStack.Add(new MoveDown(playeris));
-            updatePlayerDetails();
+            //updatePlayerDetails();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -361,6 +361,11 @@ namespace TanksRework
         //Nuskaitom visus esamus priesus
         private void button6_Click(object sender, EventArgs e)
         {
+            UpdateEnemyList();
+        }
+
+        private void LoadEnemyList()
+        {
             restas.UseNewtonsoftJson();
             IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetEnemyList/" + playeris.getId());
             restRequest.AddHeader("Accept", "application/json");
@@ -368,14 +373,14 @@ namespace TanksRework
 
             restResponse.Content = restResponse.Content.Replace("TankaiServer", "TanksRework");
 
-            var priesai = JsonConvert.DeserializeObject<List<Transportas>>(restResponse.Content, serializerSettings);
+            priesai = JsonConvert.DeserializeObject<List<Transportas>>(restResponse.Content, serializerSettings);
             playeris.observers = new List<IObserver>();
-            var priesopos = restResponse.Content[0];
+            //var priesopos = restResponse.Content[0];
             priesai.ForEach(p =>
             {
                 playeris.prideti(p);
             });
-            label1.Text = restResponse.Content;
+            //label1.Text = restResponse.Content;
 
             if (restResponse.IsSuccessful)
             {
@@ -391,14 +396,110 @@ namespace TanksRework
             {
                 //label1.Text = restResponse.ErrorMessage;
             }
+        }
 
+        private void UpdateEnemyList()
+        {
+            //playeris = new TransportasFactory().CreateTransportas(comboBox1.SelectedIndex + 1, textBox2.Text);
+
+            restas.UseNewtonsoftJson();
+
+            //Postinam savo pozicija
+            IRestRequest request = new RestRequest()
+            {
+                Resource = "https://localhost:44356/Tankas/Position/"
+            };
+
+            var test = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/xml");
+            //request.AddJsonBody(test);
+            request.AddParameter("application/json", test, ParameterType.RequestBody);
+            restas.Post<string>(request);
+            //IRestResponse<string> response = restas.Post<string>(request);
+
+
+            //Gaunam priesu sarasa
+            IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetEnemyList/" + playeris.getId());
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<List<Transportas>> restResponse = restas.Get<List<Transportas>>(restRequest);
+
+            restResponse.Content = restResponse.Content.Replace("TankaiServer", "TanksRework");
+
+            var temp = JsonConvert.DeserializeObject<List<Transportas>>(restResponse.Content, serializerSettings);
+
+            //Pridedam jei atsirado nauju
+            List<Transportas> nauji = new List<Transportas>();
+            temp.ForEach(t =>
+            {
+                int i = 0;
+                priesai.ForEach(p =>
+                {
+                    if (t.getId() == p.getId())
+                        i++;
+                });
+                if (i == 0)
+                    nauji.Add(t);
+            });
+            nauji.ForEach(n =>
+            {
+                priesai.Add(n);
+                playeris.prideti(priesai.Last());
+            });
+
+            //Ismetam jei kazkas isejo
+            List<Transportas> seni = new List<Transportas>();
+            priesai.ForEach(p =>
+            {
+                int i = 0;
+                temp.ForEach(t =>
+                {
+                    if (p.getId() == t.getId())
+                        i++;
+                });
+                if (i == 0)
+                    seni.Add(p);
+            });
+            seni.ForEach(s =>
+            {
+                var ind = priesai.FindIndex(a => a.getId() == s.getId());
+                playeris.pasalinti(priesai[ind]);
+                priesai.RemoveAt(ind);
+            });
             
+            //var matches = temp.Where(p => p.Name == nameToExtract);
+
+            playeris.pranesti(temp);
+        }
+
+        private void Disconnect()
+        {
+            restas.UseNewtonsoftJson();
+
+            //Ka atjungt?
+            IRestRequest request = new RestRequest()
+            {
+                Resource = "https://localhost:44356/Tankas/Disconnect/"
+            };
+
+            var test = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
+
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/xml");
+            //request.AddJsonBody(test);
+            request.AddParameter("application/json", test, ParameterType.RequestBody);
+            restas.Post<string>(request);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            removePlayer();
+            timer2.Stop();
+            if (playeris != null)
+                Disconnect();
+            //removePlayer();
+            //Disconnect padaryti...
             this.Close();
         }
 
@@ -412,6 +513,7 @@ namespace TanksRework
             
         }
 
+        //Connect button
         private void button8_Click(object sender, EventArgs e)
         {
             //IRestClient restClient = new RestClient();
@@ -449,7 +551,7 @@ namespace TanksRework
                 //label1.Text = JsonConvert.DeserializeObject<Transportas>(test, serializerSettings).getId();
                 //DisplayPlayer(100, 100);
 
-                DisplayPlayer();
+                LoadEnemyList();
             }
         }
 
@@ -476,6 +578,13 @@ namespace TanksRework
                 k.Execute();
             });
             commandsStack.Clear();
+            if(playeris != null)
+                updatePlayerDetails();
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (playeris != null)
+                UpdateEnemyList();
         }
 
         void Form1_KeyPress(object sender, KeyPressEventArgs e)
@@ -520,9 +629,43 @@ namespace TanksRework
                         break;
                 }
                 //command.Execute();
-                updatePlayerDetails();
+                //updatePlayerDetails();
             }
 
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            //g.DrawRectangle(Pens.Red, 10, 10, 100, 75);
+            var plotis = panel1.Width;
+            var aukstis = panel1.Height;
+            var gridSize = 15;
+            var langelioPlotis  = (float)plotis  / gridSize;
+            var langelioAukstis = (float)aukstis / gridSize;
+            var currLangX = 2;
+            var currLangY = 2;
+            for (int i = 1; i < gridSize; i++)
+            {
+                g.DrawLine(Pens.Red, langelioPlotis * i, 0, langelioPlotis * i, aukstis);
+                g.DrawLine(Pens.Red, 0, langelioAukstis * i, plotis, langelioAukstis * i);
+            }
+            g.FillEllipse(Brushes.Blue, currLangX * langelioPlotis, currLangY * langelioAukstis, langelioPlotis, langelioAukstis);
+            //currLangX++;
+            Image tankasImg = new Bitmap("assets\\tankas2d.png");
+            Image priesasImg = new Bitmap("assets\\tankas2denemy.png");
+
+            if(playeris != null)
+                g.DrawImage(tankasImg, playeris.positionx * langelioPlotis + 1, playeris.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+
+            if (!(priesai is null) && priesai.Count > 0)
+            {
+                priesai.ForEach(pries =>
+                {
+                    g.DrawImage(priesasImg, pries.positionx * langelioPlotis + 1, pries.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+                });
+            }
+        }
+
     }
 }
