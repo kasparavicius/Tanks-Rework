@@ -231,6 +231,7 @@
     <Compile Include="Classes\Builder\Director.cs" />
     <Compile Include="Classes\Builder\IBuilder.cs" />
     <Compile Include="Classes\Builder\ObstacleBuilder.cs" />
+    <Compile Include="Classes\Builder\PowerUpBuilder.cs" />
     <Compile Include="Classes\LaivasTransportas.cs" />
     <Compile Include="Classes\LektuvasTransportas.cs" />
     <Compile Include="Classes\TankasTransportas.cs" />

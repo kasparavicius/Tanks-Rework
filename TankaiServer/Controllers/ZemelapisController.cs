@@ -47,9 +47,15 @@ namespace TankaiServer.Controllers
         public void StartMap()
         {
             IBuilder b1 = new ObstacleBuilder(map);
+
             director.Construct(b1);
+
             System.Web.HttpContext.Current.Application["map"] = b1.GetResult();
             map = b1.GetResult();
+            IBuilder b2 = new PowerUpBuilder(map);
+            director.Construct(b2);
+            map = b2.GetResult();
+            System.Web.HttpContext.Current.Application["map"] = b2.GetResult();
         }
     }
 }
