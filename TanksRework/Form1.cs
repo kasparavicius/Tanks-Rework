@@ -63,8 +63,8 @@ namespace TanksRework
         {
             this.ControlBox = false;
             InitializeComponent();
-            dataGridView1.RowCount = 15;
-            dataGridView1.ColumnCount = 25;
+            //dataGridView1.RowCount = 15;
+            //dataGridView1.ColumnCount = 25;
 
             commandsStack = new List<ICommand>();
 

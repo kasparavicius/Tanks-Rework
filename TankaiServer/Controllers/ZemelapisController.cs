@@ -23,9 +23,10 @@ namespace TankaiServer.Controllers
 
 
         // GET: api/Zemelapis/5
-        public object Get(int id)
+        public int[,] Get(int id)
         {
-            return System.Web.HttpContext.Current.Application["map"];
+            int[,] mapas = (int[,])System.Web.HttpContext.Current.Application["map"];
+            return mapas;
         }
 
         // POST: api/Zemelapis
