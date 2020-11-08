@@ -28,7 +28,7 @@ namespace TanksRework
 {
     public partial class Form1 : Form
     {
-        Zemelapis zemelapis = new Zemelapis();
+        Zemelapis zemelapis;
         List<Player> enemies = new List<Player>();
         List<Player> enemiesold = new List<Player>();
         Player zaidejas = new Player();
@@ -561,6 +561,7 @@ namespace TanksRework
 
         public void GetMap()
         {
+            int[,] tempmatrix;
             restas.UseNewtonsoftJson();
             IRestRequest restRequest = new RestRequest("https://localhost:44356/api/zemelapis/2");
             restRequest.AddHeader("Accept", "application/json");
@@ -568,8 +569,8 @@ namespace TanksRework
 
             restResponse.Content = restResponse.Content.Replace("TankaiServer", "TanksRework");
 
-            zemelapis.matrix = JsonConvert.DeserializeObject<int[,]>(restResponse.Content, serializerSettings);
-
+            tempmatrix = JsonConvert.DeserializeObject<int[,]>(restResponse.Content, serializerSettings);
+            zemelapis = new Zemelapis(tempmatrix);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -689,23 +690,8 @@ namespace TanksRework
                 {
                     for (int j = 0; j < zemelapis.sizeY; j++)
                     {
-                        switch (zemelapis.matrix[i, j])
-                        {
-                            case 1:
-                                g.FillEllipse(Brushes.Green, i * langelioPlotis, j * langelioAukstis, langelioPlotis, langelioAukstis);
-                                break;
-                            case 2:
-                                g.FillEllipse(Brushes.Blue, i * langelioPlotis, j * langelioAukstis, langelioPlotis, langelioAukstis);
-                                break;
-                            case 3:
-                                g.FillEllipse(Brushes.Gray, i * langelioPlotis, j * langelioAukstis, langelioPlotis, langelioAukstis);
-                                break;
-                            case 4:
-                                g.FillEllipse(Brushes.Yellow, i * langelioPlotis, j * langelioAukstis, langelioPlotis, langelioAukstis);
-                                break;
-                            default:
-                                break;
-                        }
+                        g.DrawImage(new Bitmap(zemelapis.langeliai[i, j].imageLoc), i * langelioPlotis + 1, j * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+
                     }
                 }
             }
