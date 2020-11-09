@@ -23,6 +23,7 @@ using TankaiRework.ER;
 using System.Drawing.Text;
 using TankaiRework.Commander;
 using TanksRework.Classes.Zemelapis;
+using TanksRework.Classes.Adapter;
 
 namespace TanksRework
 {
@@ -32,6 +33,8 @@ namespace TanksRework
         List<Player> enemies = new List<Player>();
         List<Player> enemiesold = new List<Player>();
         Player zaidejas = new Player();
+        NormalFountain fountain;
+        RestoreFountainAdapter resfount;
 
         Transportas playeris;// = new TransportasFactory().CreateTransportas(1, "nuva");
         List<Transportas> priesai;
@@ -152,6 +155,7 @@ namespace TanksRework
             //label2.Text = zaidejas._id;
             //DisplayPlayer(100, 100);
             GetMap();
+            GetAdapter();
             
 
             this.KeyPress +=
@@ -572,6 +576,28 @@ namespace TanksRework
             tempmatrix = JsonConvert.DeserializeObject<int[,]>(restResponse.Content, serializerSettings);
             zemelapis = new Zemelapis(tempmatrix);
         }
+        public void GetAdapter()
+        {
+            string tempheal;
+            restas.UseNewtonsoftJson();
+            IRestRequest restRequest = new RestRequest("https://localhost:44356/api/Fountain/2");
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<string> restResponse = restas.Get<string>(restRequest);
+
+            restResponse.Content = restResponse.Content.Replace("TankaiServer", "TanksRework");
+
+            tempheal = JsonConvert.DeserializeObject<string>(restResponse.Content, serializerSettings);
+            int tipas = int.Parse(tempheal);
+            int cc = 0;
+            if(tipas == 1)
+            {
+                fountain = new NormalFountain();
+            }
+            if (tipas == 10)
+            {
+                resfount = new RestoreFountainAdapter(new RestoreFountain());
+            }
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -672,6 +698,8 @@ namespace TanksRework
             //currLangX++;
             Image tankasImg = new Bitmap("assets\\tankas2d.png");
             Image priesasImg = new Bitmap("assets\\tankas2denemy.png");
+            Image fountainImg = new Bitmap("assets\\normalfountain.png");
+            Image RestoreImg = new Bitmap("assets\\restorefountain.png");
 
             if(playeris != null)
                 g.DrawImage(tankasImg, playeris.positionx * langelioPlotis + 1, playeris.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
@@ -694,6 +722,14 @@ namespace TanksRework
 
                     }
                 }
+            }
+            if(playeris != null && fountain != null)
+            {
+                g.DrawImage(fountainImg, fountain.positionx * langelioPlotis + 1, fountain.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+            }
+            if (playeris != null && resfount != null)
+            {
+                g.DrawImage(RestoreImg, resfount.fountain.positionx * langelioPlotis + 1, resfount.fountain.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
             }
         }
 

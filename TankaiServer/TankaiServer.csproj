@@ -228,6 +228,10 @@
     <Compile Include="Classes\AbstractFactory\SmallTornadas.cs" />
     <Compile Include="Classes\AbstractFactory\StichijosFactory.cs" />
     <Compile Include="Classes\AbstractFactory\TornadasFactory.cs" />
+    <Compile Include="Classes\Adapter\Fountain.cs" />
+    <Compile Include="Classes\Adapter\NormalFountain.cs" />
+    <Compile Include="Classes\Adapter\RestoreFountain.cs" />
+    <Compile Include="Classes\Adapter\RestoreFountainAdapter.cs" />
     <Compile Include="Classes\Builder\Director.cs" />
     <Compile Include="Classes\Builder\IBuilder.cs" />
     <Compile Include="Classes\Builder\ObstacleBuilder.cs" />
@@ -237,6 +241,7 @@
     <Compile Include="Classes\TankasTransportas.cs" />
     <Compile Include="Classes\Transportas.cs" />
     <Compile Include="Classes\TransportasFactory.cs" />
+    <Compile Include="Controllers\FountainController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TankasController.cs" />
     <Compile Include="Controllers\TransportasController.cs" />

@@ -4,9 +4,13 @@ using System.Text;
 
 namespace TanksRework.Classes.Adapter
 {
-    class RestoreFountainAdapter : Fountain
+    class RestoreFountainAdapter : IFountain
     {
-        RestoreFountain fountain = new RestoreFountain();
+        public RestoreFountain fountain;
+        public RestoreFountainAdapter(RestoreFountain fountain)
+        {
+            this.fountain = fountain;
+        }
         public int Heal()
         {
             return fountain.Restore();

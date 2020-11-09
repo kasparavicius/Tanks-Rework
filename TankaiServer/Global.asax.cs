@@ -34,6 +34,8 @@ namespace TankaiServer
             
             ModelBinders.Binders.Add(new KeyValuePair<Type, IModelBinder>(typeof(Transportas), new TransportasBinder()));
             ZemelapisController map = new ZemelapisController();
+            FountainController healed = new FountainController();
+            healed.AddRestore();
             map.StartMap();
         }
 

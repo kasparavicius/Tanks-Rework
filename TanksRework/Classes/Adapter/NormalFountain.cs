@@ -7,22 +7,19 @@ using Newtonsoft.Json;
 namespace TanksRework.Classes.Adapter
 {
     [JsonObject(MemberSerialization.OptIn)]
-    class NormalFountain
+    class NormalFountain : IFountain
     {
-        [JsonProperty]
-        private string _id { get; set; }
         [JsonProperty]
         public int HealAmount { get; set; }
         [JsonProperty]
         public int positionx { get; set; }
         [JsonProperty]
         public int positiony { get; set; }
-        public NormalFountain(string id, int heal, int posx, int posy)
+        public NormalFountain()
         {
-            _id = id;
-            HealAmount = heal;
-            positionx = posx;
-            positiony = posy;
+            HealAmount = 10;
+            positionx = 7;
+            positiony = 7;
         }
         public int Heal()
         {

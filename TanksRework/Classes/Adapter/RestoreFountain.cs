@@ -10,27 +10,20 @@ namespace TanksRework.Classes.Adapter
     class RestoreFountain
     {
         [JsonProperty]
-        private string _id { get; set; }
-        [JsonProperty]
         public int HealAmount { get; set; }
         [JsonProperty]
         public int positionx { get; set; }
         [JsonProperty]
         public int positiony { get; set; }
-        public RestoreFountain(string id, int heal, int posx, int posy)
-        {
-            _id = id;
-            HealAmount = heal;
-            positionx = posx;
-            positiony = posy;
-        }
         public RestoreFountain()
         {
-
+            HealAmount = 10;
+            positionx = 7;
+            positiony = 7;
         }
         public int Restore()
         {
-            return HealAmount = 10;
+            return HealAmount;
         }
     }
 }

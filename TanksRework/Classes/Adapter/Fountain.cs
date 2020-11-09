@@ -4,8 +4,10 @@ using System.Text;
 
 namespace TanksRework.Classes.Adapter
 {
-    public interface Fountain
+
+    public interface IFountain
     {
-        public int Heal();
+            int Heal();
     }
+
 }
