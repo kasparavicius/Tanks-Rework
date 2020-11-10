@@ -14,11 +14,11 @@ namespace Classes
 
                 case 1:
                     {
-                        return new LaivasTransportas(trName, 120, 8, rnd.Next(1, 15), rnd.Next(1, 15) );
+                        return new LaivasTransportas(trName, 120, 8, rnd.Next(10, 15), rnd.Next(1, 15) );
                     }
                 case 2:
                     {
-                        return new TankasTransportas(trName, 80, 12, rnd.Next(1, 15), rnd.Next(1, 15) );
+                        return new TankasTransportas(trName, 80, 12, rnd.Next(1, 9), rnd.Next(1, 15) );
                     }
                 case 3:
                     {

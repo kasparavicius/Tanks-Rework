@@ -238,26 +238,26 @@ namespace TanksRework
         // up
         private void button3_Click(object sender, EventArgs e)
         {
-            commandsStack.Add(new MoveUp(playeris));
+            commandsStack.Add(new MoveUp(playeris, zemelapis.matrix));
             //updatePlayerDetails();
         }
         //left
         private void button2_Click(object sender, EventArgs e)
         {
-            commandsStack.Add(new MoveLeft(playeris));
+            commandsStack.Add(new MoveLeft(playeris, zemelapis.matrix));
             //updatePlayerDetails();
         }
         //right
         private void button1_Click(object sender, EventArgs e)
         {
-            commandsStack.Add(new MoveRight(playeris));
+            commandsStack.Add(new MoveRight(playeris, zemelapis.matrix));
             //updatePlayerDetails();
             
         }
         //down
         private void button4_Click(object sender, EventArgs e)
         {
-            commandsStack.Add(new MoveDown(playeris));
+            commandsStack.Add(new MoveDown(playeris, zemelapis.matrix));
             //updatePlayerDetails();
         }
 
@@ -520,16 +520,16 @@ namespace TanksRework
                 switch (Char.ToLower(e.KeyChar))
                 {
                     case 'w':
-                        commandsStack.Add(new MoveUp(playeris));
+                        commandsStack.Add(new MoveUp(playeris, zemelapis.matrix));
                         break;
                     case 's':
-                        commandsStack.Add(new MoveDown(playeris));
+                        commandsStack.Add(new MoveDown(playeris, zemelapis.matrix));
                         break;
                     case 'a':
-                        commandsStack.Add(new MoveLeft(playeris));
+                        commandsStack.Add(new MoveLeft(playeris, zemelapis.matrix));
                         break;
                     case 'd':
-                        commandsStack.Add(new MoveRight(playeris));
+                        commandsStack.Add(new MoveRight(playeris, zemelapis.matrix));
                         break;
                     default:
                         break;

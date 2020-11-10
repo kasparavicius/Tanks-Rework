@@ -69,9 +69,9 @@ namespace Classes
             //if nera tokio id sarase, pridedam prie observeriu?
         }
 
-        public void Move(int x, int y)
+        public void Move(int x, int y, int[,] zemelapis)
         {
-            var positions = _strategy.Move(x, y, this.positionx, this.positiony);
+            var positions = _strategy.Move(x, y, this.positionx, this.positiony, zemelapis);
             this.positionx = positions.Item1;
             this.positiony = positions.Item2;
         }
