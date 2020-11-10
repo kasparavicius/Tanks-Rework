@@ -1,4 +1,8 @@
-﻿namespace TanksRework
+﻿using System.Reflection;
+using System.Windows.Forms;
+using YourProject;
+
+namespace TanksRework
 {
     partial class Form1
     {
@@ -44,16 +48,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new YourProject.MyPanel();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(199, 553);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Location = new System.Drawing.Point(174, 415);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 31);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "right";
             this.button1.UseVisualStyleBackColor = true;
@@ -61,10 +64,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(14, 553);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button2.Location = new System.Drawing.Point(12, 415);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(86, 31);
+            this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 0;
             this.button2.Text = "left";
             this.button2.UseVisualStyleBackColor = true;
@@ -72,10 +74,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(106, 515);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button3.Location = new System.Drawing.Point(93, 386);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(86, 31);
+            this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 0;
             this.button3.Text = "up";
             this.button3.UseVisualStyleBackColor = true;
@@ -83,10 +84,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(106, 553);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button4.Location = new System.Drawing.Point(93, 415);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(86, 31);
+            this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 0;
             this.button4.Text = "down";
             this.button4.UseVisualStyleBackColor = true;
@@ -94,29 +94,25 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Location = new System.Drawing.Point(678, 16);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Location = new System.Drawing.Point(593, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(437, 184);
+            this.groupBox2.Size = new System.Drawing.Size(382, 138);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(678, 208);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox1.Location = new System.Drawing.Point(593, 156);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(343, 27);
+            this.textBox1.Size = new System.Drawing.Size(301, 23);
             this.textBox1.TabIndex = 2;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(1029, 208);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button5.Location = new System.Drawing.Point(900, 156);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(86, 31);
+            this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 0;
             this.button5.Text = "Send";
             this.button5.UseVisualStyleBackColor = true;
@@ -124,18 +120,17 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(690, 287);
+            this.label2.Location = new System.Drawing.Point(604, 215);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 20);
+            this.label2.Size = new System.Drawing.Size(38, 15);
             this.label2.TabIndex = 6;
             this.label2.Text = "label2";
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(1014, 539);
-            this.button7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button7.Location = new System.Drawing.Point(887, 404);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(86, 31);
+            this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 7;
             this.button7.Text = "Exit";
             this.button7.UseVisualStyleBackColor = true;
@@ -143,10 +138,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(625, 539);
-            this.button8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button8.Location = new System.Drawing.Point(547, 404);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(86, 31);
+            this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 8;
             this.button8.Text = "button8";
             this.button8.UseVisualStyleBackColor = true;
@@ -154,10 +148,9 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(504, 539);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBox2.Location = new System.Drawing.Point(441, 404);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(114, 27);
+            this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 9;
             // 
             // timer1
@@ -167,18 +160,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(690, 397);
+            this.label1.Location = new System.Drawing.Point(604, 298);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 10;
             this.label1.Text = "label1";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(745, 424);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.richTextBox1.Location = new System.Drawing.Point(652, 318);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(244, 151);
+            this.richTextBox1.Size = new System.Drawing.Size(214, 114);
             this.richTextBox1.TabIndex = 11;
             this.richTextBox1.Text = "";
             // 
@@ -189,18 +181,16 @@
             "Laivas",
             "Tankas",
             "Lektuvas"});
-            this.comboBox1.Location = new System.Drawing.Point(961, 287);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.comboBox1.Location = new System.Drawing.Point(841, 215);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(138, 28);
+            this.comboBox1.Size = new System.Drawing.Size(121, 23);
             this.comboBox1.TabIndex = 12;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(66, 71);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Location = new System.Drawing.Point(58, 55);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(490, 379);
+            this.panel1.Size = new System.Drawing.Size(429, 284);
             this.panel1.TabIndex = 13;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -210,9 +200,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1128, 585);
+            this.ClientSize = new System.Drawing.Size(987, 439);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.richTextBox1);
@@ -228,8 +218,8 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.DoubleBuffered = true;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Exit";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -255,8 +245,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer timer2;
+        private MyPanel panel1;
     }
 }
 

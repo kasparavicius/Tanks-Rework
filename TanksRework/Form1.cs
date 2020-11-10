@@ -29,7 +29,9 @@ namespace TanksRework
 {
     public partial class Form1 : Form
     {
-        Zemelapis zemelapis;
+
+        int[,] oldMap;
+        Zemelapis zemelapis = new Zemelapis(new int[15, 15]);
         List<Player> enemies = new List<Player>();
         List<Player> enemiesold = new List<Player>();
         Player zaidejas = new Player();
@@ -197,6 +199,7 @@ namespace TanksRework
             IRestResponse response = restClient.Patch(request);*/
             richTextBox1.Text = $"Naujos koord = {playeris.positionx}, {playeris.positiony}\n";
             panel1.Invalidate();
+            
         }
 
         private void updateEnemiesDetails()
@@ -468,6 +471,7 @@ namespace TanksRework
             restResponse.Content = restResponse.Content.Replace("TankaiServer", "TanksRework");
 
             tempmatrix = JsonConvert.DeserializeObject<int[,]>(restResponse.Content, serializerSettings);
+            oldMap = zemelapis.matrix;
             zemelapis = new Zemelapis(tempmatrix);
         }
         public void GetAdapter()
@@ -543,6 +547,8 @@ namespace TanksRework
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+        
+
             //g.DrawRectangle(Pens.Red, 10, 10, 100, 75);
             var plotis = panel1.Width;
             var aukstis = panel1.Height;
@@ -562,16 +568,7 @@ namespace TanksRework
             Image fountainImg = new Bitmap("assets\\normalfountain.png");
             Image RestoreImg = new Bitmap("assets\\restorefountain.png");
 
-            if(playeris != null)
-                g.DrawImage(tankasImg, playeris.positionx * langelioPlotis + 1, playeris.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
-
-            if (!(priesai is null) && priesai.Count > 0)
-            {
-                priesai.ForEach(pries =>
-                {
-                    g.DrawImage(priesasImg, pries.positionx * langelioPlotis + 1, pries.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
-                });
-            }
+            
             if (playeris != null)
             {
 
@@ -579,12 +576,24 @@ namespace TanksRework
                 {
                     for (int j = 0; j < zemelapis.sizeY; j++)
                     {
-                        g.DrawImage(new Bitmap(zemelapis.langeliai[i, j].imageLoc), i * langelioPlotis + 1, j * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
-
+                            g.DrawImage(new Bitmap(zemelapis.langeliai[i, j].imageLoc), i * langelioPlotis + 1, j * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
                     }
                 }
+                GetMap();
+
+
+                if (playeris != null)
+                    g.DrawImage(tankasImg, playeris.positionx * langelioPlotis + 1, playeris.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+
+                if (!(priesai is null) && priesai.Count > 0)
+                {
+                    priesai.ForEach(pries =>
+                    {
+                        g.DrawImage(priesasImg, pries.positionx * langelioPlotis + 1, pries.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+                    });
+                }
             }
-            if(playeris != null && fountain != null)
+            if (playeris != null && fountain != null)
             {
                 g.DrawImage(fountainImg, fountain.positionx * langelioPlotis + 1, fountain.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
             }
