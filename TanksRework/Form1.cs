@@ -84,11 +84,7 @@ namespace TanksRework
 
             //Kulkos test
             Ginklas ginklas = new Ginklas(10, 10);
-            /*richTextBox1.Text = 
-                $"Simple zala {ginklas.ZalaSimple()}\n" +
-                $"Fire zala {ginklas.ZalaFire()}\n" +
-                $"Explosive zala {ginklas.ZalaExplosive()}\n" +
-                $"Both zala {ginklas.ZalaFireAndExplosive()}\n";*/
+    
             richTextBox1.Text = $"Simple zala {ginklas.GetZala()}\n";
             ginklas.AddPowerUp(1);
             richTextBox1.Text += $"Fire zala {ginklas.GetZala()}\n";
@@ -109,51 +105,6 @@ namespace TanksRework
 
 
             TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, 5, 5 );
-
-            //zaidejas.atnaujinti("la");
-            //Transportas priesas = new TransportasFactory().CreateTransportas(1, "nuva");
-            //zaidejas3.prideti(priesas);
-            //zaidejas3.pranesti("hello");
-
-            //zaidejas = getPlayerDetails("7x6s7vs5adns84au9ypkg5d6");
-            //IRestClient restClient = new RestClient();
-
-            ////Getas
-            //IRestRequest restRequest = new RestRequest(getUrl + "7x6s7vs5adns84au9ypkg5d6");
-            //restRequest.AddHeader("Accept", "application/json");
-            //IRestResponse<Player> restResponse = restClient.Get<Player>(restRequest);
-
-            //if (restResponse.IsSuccessful)
-            //{
-            //    label1.Text = restResponse.Data.pavadinimas;
-            //}
-            //else
-            //{
-            //    label1.Text = restResponse.ErrorMessage;
-            //}
-
-
-            //////Tankiukas
-            //zaidejas.metai = 8888;
-            //zaidejas.pavadinimas = "ParduoduAscona";
-            //zaidejas.pozicijax = 5;
-            //zaidejas.pozicijay = 5;
-
-            ////Postas
-            //IRestRequest request = new RestRequest()
-            //{
-            //    Resource = postUrl
-            //};
-
-            //request.AddHeader("Content-Type", "application/json");
-            //request.AddHeader("Accept", "application/xml");
-            //request.AddJsonBody(zaidejas);
-
-            //IRestResponse<string> response = restClient.Post<string>(request);
-            //zaidejas._id = response.Data;
-            ////zaidejas._id = playerId;
-            //label2.Text = zaidejas._id;
-            //DisplayPlayer(100, 100);
             GetMap();
             GetAdapter();
             
@@ -256,34 +207,6 @@ namespace TanksRework
             enemiesold = enemies;
         }
 
-        /*private void DisplayEnemies(List<Player> naujas, List<Player> senas)
-        {
-
-            Bitmap img = (Bitmap)Bitmap.FromFile("assets\\tankas2denemy.png");
-            Bitmap newImage = new Bitmap(img, 20, 20);
-            DataGridViewImageCell icell = new DataGridViewImageCell();
-            icell.Value = newImage;
-            string empty = "";
-
-            if (senas.Count <= 1)
-            {
-                foreach (var vienas in senas)
-                {
-                    dataGridView1[vienas.pozicija[0], vienas.pozicija[1]].Value = new Bitmap(1, 1);
-                }
-            }
-
-            foreach (var vienas in naujas)
-            {
-                if (dataGridView1[vienas.pozicija[0], vienas.pozicija[1]] != icell)
-                {
-                    dataGridView1[vienas.pozicija[0], vienas.pozicija[1]] = icell;
-
-                }
-
-            }  
-        }*/
-
         //Remove on close
         private void removePlayer()
         {
@@ -298,29 +221,6 @@ namespace TanksRework
 
             IRestResponse response = restClient.Delete(request);
         }
-
-        /*private void DisplayPlayer()
-        {
-
-            Bitmap img = (Bitmap) Bitmap.FromFile("assets\\tankas2d.png");
-            Bitmap newImage = new Bitmap(img, 20, 20);
-            DataGridViewImageCell icell = new DataGridViewImageCell();
-            icell.Value = newImage;
-            string empty = "";
-
-            //if (senasx < 100 && senasy < 100)
-            //{
-            //dataGridView1[senasx, senasy].Value = new Bitmap(1, 1);
-            dataGridView1.DataSource = null;
-            dataGridView1.Refresh();
-
-                dataGridView1[playeris.positionx, playeris.positiony] = icell;
-            //}
-            //else 
-                //dataGridView1[playeris.positionx, playeris.positiony] = icell;
-
-        }*/
-
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             String value = e.Value as string;
@@ -528,12 +428,6 @@ namespace TanksRework
 
             if (textBox2.Text != null)
             {
-                /*Random rnd = new Random();
-                zaidejas.metai = 1998;
-                zaidejas.pavadinimas = textBox2.Text;
-                zaidejas.pozicija[0] = rnd.Next(1, 15);
-                zaidejas.pozicija[1] = rnd.Next(1, 15);*/
-
                 playeris = new TransportasFactory().CreateTransportas(comboBox1.SelectedIndex+1, textBox2.Text);
 
                 restas.UseNewtonsoftJson();
@@ -601,22 +495,6 @@ namespace TanksRework
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            /*   //TO-DO: Get changes from server
-               IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetEnemyList/" + playeris.getId());
-               restRequest.AddHeader("Accept", "application/json");
-               IRestResponse<List<Transportas>> restResponse = restas.Get<List<Transportas>>(restRequest);
-
-               if (restResponse.IsSuccessful)
-               {
-                   //return restResponse.Data;
-                   //priesai = restResponse.Data;
-                   playeris.pranesti(restResponse.Data);
-               }
-               else
-               {
-                   // label1.Text = restResponse.ErrorMessage;
-               }*/
-
             commandsStack.ForEach(k =>
             {
                 k.Execute();
@@ -633,22 +511,6 @@ namespace TanksRework
 
         void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            /*if (e.KeyChar >= 48 && e.KeyChar <= 57)
-            {
-                MessageBox.Show($"Form.KeyPress: '{e.KeyChar}' pressed.");
-
-                switch (e.KeyChar)
-                {
-                    case (char)49:
-                    case (char)52:
-                    case (char)55:
-                        MessageBox.Show($"Form.KeyPress: '{e.KeyChar}' consumed.");
-                        e.Handled = true;
-                        break;
-                }
-            }*/
-
-            //
             if ((Char.ToLower(e.KeyChar) == Char.ToLower((char)Keys.W) || Char.ToLower(e.KeyChar) == Char.ToLower((char)Keys.S) ||
                 Char.ToLower(e.KeyChar) == Char.ToLower((char)Keys.A) || Char.ToLower(e.KeyChar) == Char.ToLower((char)Keys.D)) && !(playeris is null))
             {
