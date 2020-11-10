@@ -251,7 +251,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\MongoHelper.cs" />
-    <Compile Include="Models\Stichija.cs" />
     <Compile Include="Models\Tankas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

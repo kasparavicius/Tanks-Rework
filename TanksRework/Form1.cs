@@ -694,7 +694,6 @@ namespace TanksRework
                 g.DrawLine(Pens.Red, langelioPlotis * i, 0, langelioPlotis * i, aukstis);
                 g.DrawLine(Pens.Red, 0, langelioAukstis * i, plotis, langelioAukstis * i);
             }
-            g.FillEllipse(Brushes.Blue, currLangX * langelioPlotis, currLangY * langelioAukstis, langelioPlotis, langelioAukstis);
             //currLangX++;
             Image tankasImg = new Bitmap("assets\\tankas2d.png");
             Image priesasImg = new Bitmap("assets\\tankas2denemy.png");

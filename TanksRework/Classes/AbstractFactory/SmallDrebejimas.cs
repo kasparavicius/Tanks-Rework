@@ -8,15 +8,15 @@ namespace TanksRework.Classes.AbstractFactory
     {
         public SmallDrebejimas(int dmg, int posx, int posy) : base(dmg, posx, posy)
         {
-            type = 5;
+            type = 6;
         }
         public SmallDrebejimas(string id, int dmg, int posx, int posy) : base(id, dmg, posx, posy)
         {
-            type = 5;
+            type = 6;
         }
         public SmallDrebejimas()
         {
-            type = 5;
+            type = 6;
         }
     }
 }
