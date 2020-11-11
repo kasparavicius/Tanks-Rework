@@ -61,7 +61,12 @@ namespace TanksRework
         private string locationUrl = "https://localhost:44356/tankas/ChangeLocation";
         private string removeUrl = "https://localhost:44356/tankas/Remove";
 
-        //private string playerId = "";
+        //Load textures
+        Image tankasImg = new Bitmap("assets\\tankas2d.png");
+        Image priesasImg = new Bitmap("assets\\tankas2denemy.png");
+        Image fountainImg = new Bitmap("assets\\normalfountain.png");
+        Image RestoreImg = new Bitmap("assets\\restorefountain.png");
+        Image[,] mapTextures = new Image[15,15];
 
 
         public Form1()
@@ -109,7 +114,15 @@ namespace TanksRework
             TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, 5, 5 );
             GetMap();
             GetAdapter();
-            
+
+            //Load map textures
+            for (int i = 0; i < 15; i++)
+            {
+                for (int j = 0; j < 15; j++)
+                {
+                    mapTextures[i, j] = new Bitmap(zemelapis.langeliai[i, j].imageLoc);
+                }
+            }
 
             this.KeyPress +=
                 new KeyPressEventHandler(Form1_KeyPress);
@@ -555,18 +568,13 @@ namespace TanksRework
             var gridSize = 15;
             var langelioPlotis  = (float)plotis  / gridSize;
             var langelioAukstis = (float)aukstis / gridSize;
-            var currLangX = 2;
-            var currLangY = 2;
+
             for (int i = 1; i < gridSize; i++)
             {
                 g.DrawLine(Pens.Red, langelioPlotis * i, 0, langelioPlotis * i, aukstis);
                 g.DrawLine(Pens.Red, 0, langelioAukstis * i, plotis, langelioAukstis * i);
             }
             //currLangX++;
-            Image tankasImg = new Bitmap("assets\\tankas2d.png");
-            Image priesasImg = new Bitmap("assets\\tankas2denemy.png");
-            Image fountainImg = new Bitmap("assets\\normalfountain.png");
-            Image RestoreImg = new Bitmap("assets\\restorefountain.png");
 
             
             if (playeris != null)
@@ -576,7 +584,7 @@ namespace TanksRework
                 {
                     for (int j = 0; j < zemelapis.sizeY; j++)
                     {
-                            g.DrawImage(new Bitmap(zemelapis.langeliai[i, j].imageLoc), i * langelioPlotis + 1, j * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+                        g.DrawImage(mapTextures[i, j], i * langelioPlotis + 1, j * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
                     }
                 }
                 GetMap();
