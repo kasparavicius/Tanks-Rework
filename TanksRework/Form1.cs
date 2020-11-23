@@ -24,6 +24,7 @@ using System.Drawing.Text;
 using TankaiRework.Commander;
 using TanksRework.Classes.Zemelapis;
 using TanksRework.Classes.Adapter;
+using TankaiRework.Classes.Messages;
 
 namespace TanksRework
 {
@@ -44,6 +45,9 @@ namespace TanksRework
         //Commander initialize
         //private ICommand command;
         private List<ICommand> commandsStack;
+
+        //Chats
+        List<TankaiRework.Classes.Messages.Message> messages;
 
         static HttpClient client = new HttpClient();
         IRestClient restas = new RestClient();
@@ -78,12 +82,17 @@ namespace TanksRework
 
             commandsStack = new List<ICommand>();
 
+            messages = new List<TankaiRework.Classes.Messages.Message>();
+
 
             timer1.Interval = 100;
             timer1.Start();
 
             timer2.Interval = 100;
             timer2.Start();
+
+            timer3.Interval = 1000;
+            timer3.Start();
 
             //Load stichijos
             StichijosCache Stichijos = new StichijosCache();
@@ -611,5 +620,65 @@ namespace TanksRework
             }
         }
 
+        //Send msg
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != null)
+            {
+                //TankaiRework.Classes.Messages.Message msg = new TankaiRework.Classes.Messages.Message(playeris.getId(), playeris.getName(), textBox1.Text);
+                TankaiRework.Classes.Messages.Message msg = new TankaiRework.Classes.Messages.Message(playeris is null ? "guest" : playeris.getId(), playeris is null ? "Guest" : playeris.getName(), textBox1.Text);
+
+                restas.UseNewtonsoftJson();
+
+                //Postas
+                IRestRequest request = new RestRequest()
+                {
+                    Resource = "https://localhost:44356/api/message/"
+                };
+
+                var test = JsonConvert.SerializeObject(msg, Formatting.Indented);
+
+                request.AddHeader("Content-Type", "application/json");
+                request.AddHeader("Accept", "application/xml");
+                //request.AddJsonBody(test);
+                request.AddParameter("application/json", test, ParameterType.RequestBody);
+
+                //restas.Post<string>(request);
+                restas.Post(request);
+                //playeris.setId(response.Data);
+
+                //richTextBox1.Text = test;
+            }
+        }
+
+        //Gaunam chata
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            restas.UseNewtonsoftJson();
+
+            //Gaunam priesu sarasa
+            IRestRequest restRequest = new RestRequest("https://localhost:44356/api/message/");
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<List<TankaiRework.Classes.Messages.Message>> restResponse = restas.Get<List<TankaiRework.Classes.Messages.Message>>(restRequest);
+
+            restResponse.Content = restResponse.Content.Replace("TankaiServer", "TanksRework");
+            restResponse.Content = restResponse.Content.Replace("Classes.Messages.Message", "TankaiRework.Classes.Messages.Message");
+
+            var temp = JsonConvert.DeserializeObject<List<TankaiRework.Classes.Messages.Message>>(restResponse.Content, serializerSettings);
+
+            var paziurim = !temp.SequenceEqual(messages);
+
+            if (temp.Count > 0 && temp.Count != messages.Count)
+            {
+                messages = temp;
+                richTextBox2.Text = "";
+                messages.ForEach(t =>
+                {
+                    richTextBox2.Text += t.name + ": " + t.message + "\n";
+                });
+                richTextBox2.SelectionStart = richTextBox2.Text.Length;
+                richTextBox2.ScrollToCaret();
+            }
+        }
     }
 }

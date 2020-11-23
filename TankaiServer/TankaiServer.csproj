@@ -243,6 +243,7 @@
     <Compile Include="Classes\TransportasFactory.cs" />
     <Compile Include="Controllers\FountainController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\TankasController.cs" />
     <Compile Include="Controllers\TransportasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Messages\Message.cs" />
     <Compile Include="Models\MongoHelper.cs" />
     <Compile Include="Models\Tankas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -315,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -38,6 +38,7 @@ namespace TanksRework
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,6 +51,8 @@ namespace TanksRework
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel1 = new YourProject.MyPanel();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -94,28 +97,42 @@ namespace TanksRework
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.richTextBox2);
+            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Location = new System.Drawing.Point(593, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(382, 138);
+            this.groupBox2.Size = new System.Drawing.Size(428, 138);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Chat";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox2.Location = new System.Drawing.Point(1, 23);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(380, 86);
+            this.richTextBox2.TabIndex = 3;
+            this.richTextBox2.Text = "";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(593, 156);
+            this.textBox1.Location = new System.Drawing.Point(0, 115);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(301, 23);
             this.textBox1.TabIndex = 2;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(900, 156);
+            this.button5.Location = new System.Drawing.Point(307, 115);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 0;
             this.button5.Text = "Send";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label2
             // 
@@ -198,11 +215,16 @@ namespace TanksRework
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // timer3
+            // 
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 439);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.richTextBox1);
@@ -211,9 +233,6 @@ namespace TanksRework
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -223,6 +242,8 @@ namespace TanksRework
             this.Name = "Form1";
             this.Text = "Exit";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,6 +268,8 @@ namespace TanksRework
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Timer timer2;
         private MyPanel panel1;
+        private RichTextBox richTextBox2;
+        private Timer timer3;
     }
 }
 

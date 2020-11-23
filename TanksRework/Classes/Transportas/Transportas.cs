@@ -52,6 +52,10 @@ namespace Classes
 
         }
 
+        public string getName()
+        {
+            return name;
+        }
         public string getId()
         {
             return _id;
