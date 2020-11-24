@@ -6,16 +6,12 @@ using Newtonsoft.Json;
 namespace TankaiServer.Classes.AbstractFactory
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public abstract class Tornadas
+    public abstract class Tornadas : Stichija
     {
         [JsonProperty]
         private string _id { get; set; }
         [JsonProperty]
         private int damage { get; set; }
-        [JsonProperty]
-        public int positionx { get; set; }
-        [JsonProperty]
-        public int positiony { get; set; }
         [JsonProperty]
         public int type { get; set; }
 
@@ -44,6 +40,10 @@ namespace TankaiServer.Classes.AbstractFactory
         public void setId(string id)
         {
             _id = id;
+        }
+        public int getDamage()
+        {
+            return damage;
         }
         public Tornadas Clone()
         {

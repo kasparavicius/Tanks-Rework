@@ -4,17 +4,17 @@ using System.Linq;
 using System.Web;
 using TankaiServer.Classes.AbstractFactory;
 
-namespace TankaiServer.Classes.Template
+namespace TankaiServer.Classes.Stichijos
 {
     public abstract class GamtosBehaviour
     {
         protected abstract void DealDamage();
         public void Execute()
         {
-            Move();
-            DealDamage();
+            this.Move();
+            //DealDamage();
         }
-        protected void Move()
+        protected virtual void Move()
         {
 
         }

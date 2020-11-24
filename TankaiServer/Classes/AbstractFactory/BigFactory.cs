@@ -6,20 +6,18 @@ namespace TankaiServer.Classes.AbstractFactory
 {
     public class BigFactory : StichijosFactory
     {
+        private Random rnd = new Random(1337);
         public override Tornadas CreateTornadas()
         {
-            Random rnd = new Random();
-            return new BigTornadas(6, rnd.Next(1, 15), rnd.Next(1, 15));
+            return new BigTornadas(6, rnd.Next(0, 14), rnd.Next(0, 14));
         }
         public override Cunamis CreateCunamis()
         {
-            Random rnd = new Random();
-            return new BigCunamis(6, rnd.Next(1, 15), rnd.Next(1, 15));
+            return new BigCunamis(6, rnd.Next(9, 14), rnd.Next(0, 14));
         }
         public override Drebejimas CreateDrebejimas()
         {
-            Random rnd = new Random();
-            return new BigDrebejimas(6, rnd.Next(1, 15), rnd.Next(1, 15));
+            return new BigDrebejimas(6, rnd.Next(0, 8), rnd.Next(0, 14));
         }
     }
 }

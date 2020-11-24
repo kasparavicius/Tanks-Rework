@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TankaiServer.Classes.AbstractFactory
 {
-    class StichijosCache
+    public class StichijosCache
     {
         private Hashtable cunamiai;
         private Hashtable tornadai;

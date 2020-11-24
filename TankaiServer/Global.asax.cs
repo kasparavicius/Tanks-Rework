@@ -10,12 +10,16 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Classes;
 using TankaiServer.Controllers;
+using TankaiServer.Classes.Stichijos;
+using TankaiServer.Classes.AbstractFactory;
+using System.Threading.Tasks;
 using System.Timers;
 
 namespace TankaiServer
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        StichijosCache stichijos;
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -39,7 +43,21 @@ namespace TankaiServer
             
             healed.AddRestore();
             map.StartMap();
-        }
 
+            stichijos = new StichijosCache();
+            stichijos.loadCache();
+
+            //var x = HttpContext.Current.Application["hello"];
+
+            /*var currContext = HttpContext.Current;
+
+            Timer timer = new Timer(10000);
+            timer.Elapsed += async (sender, ee) => await Task.Factory.StartNew(() => {
+                StichijosDriver.StartStichijos(currContext, stichijos);
+            });
+            timer.AutoReset = true;
+            timer.Start();*/
+
+        }
     }
 }

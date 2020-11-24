@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using TankaiServer.Classes.AbstractFactory;
 
-namespace TankaiServer.Classes.Template
+namespace TankaiServer.Classes.Stichijos
 {
     class DrebejimasBehaviour : GamtosBehaviour
     {
@@ -21,14 +21,7 @@ namespace TankaiServer.Classes.Template
             {
                 if (item.getPos()[0] >= drebejimas.positionx - 1 && item.getPos()[0] <= drebejimas.positionx + 1 && item.getPos()[1] >= drebejimas.positiony - 1 && item.getPos()[1] <= drebejimas.positiony + 1)
                 {
-                    if(drebejimas.GetType().Equals(typeof(SmallDrebejimas)))
-                    {
-                        item.SetHealth(item.GetHealth() - 10);
-                    }
-                    else
-                    {
-                        item.SetHealth(item.GetHealth() - 20);
-                    }
+                    item.SetHealth(item.GetHealth() - drebejimas.getDamage());
                 }
             }
         }

@@ -225,6 +225,7 @@
     <Compile Include="Classes\AbstractFactory\SmallDrebejimas.cs" />
     <Compile Include="Classes\AbstractFactory\SmallFactory.cs" />
     <Compile Include="Classes\AbstractFactory\SmallTornadas.cs" />
+    <Compile Include="Classes\AbstractFactory\Stichija.cs" />
     <Compile Include="Classes\AbstractFactory\StichijosCache.cs" />
     <Compile Include="Classes\AbstractFactory\StichijosFactory.cs" />
     <Compile Include="Classes\AbstractFactory\Tornadas.cs" />
@@ -238,16 +239,18 @@
     <Compile Include="Classes\Builder\PowerUpBuilder.cs" />
     <Compile Include="Classes\LaivasTransportas.cs" />
     <Compile Include="Classes\LektuvasTransportas.cs" />
+    <Compile Include="Classes\Stichijos\StichijosDriver.cs" />
     <Compile Include="Classes\TankasTransportas.cs" />
-    <Compile Include="Classes\Template\CunamisBehaviour.cs" />
-    <Compile Include="Classes\Template\DrebejimasBehaviour.cs" />
-    <Compile Include="Classes\Template\GamtosBehaviour.cs" />
-    <Compile Include="Classes\Template\TornadasBehaviour.cs" />
+    <Compile Include="Classes\Stichijos\CunamisBehaviour.cs" />
+    <Compile Include="Classes\Stichijos\DrebejimasBehaviour.cs" />
+    <Compile Include="Classes\Stichijos\GamtosBehaviour.cs" />
+    <Compile Include="Classes\Stichijos\TornadasBehaviour.cs" />
     <Compile Include="Classes\Transportas.cs" />
     <Compile Include="Classes\TransportasFactory.cs" />
     <Compile Include="Controllers\FountainController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\StichijosController.cs" />
     <Compile Include="Controllers\TankasController.cs" />
     <Compile Include="Controllers\TransportasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -356,6 +359,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
