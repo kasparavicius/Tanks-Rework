@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Text;
 
 namespace TankaiServer.Classes.AbstractFactory
 {
-    public class StichijosFactory
+    public abstract class StichijosFactory
     {
+        public abstract Tornadas CreateTornadas();
+        public abstract Cunamis CreateCunamis();
+        public abstract Drebejimas CreateDrebejimas();
     }
 }

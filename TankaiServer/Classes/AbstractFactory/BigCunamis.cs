@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Text;
 
 namespace TankaiServer.Classes.AbstractFactory
 {
-    class BigCunamis : AbstractCunamis
+    class BigCunamis : Cunamis
     {
         public BigCunamis(int dmg, int posx, int posy) : base(dmg, posx, posy)
         {

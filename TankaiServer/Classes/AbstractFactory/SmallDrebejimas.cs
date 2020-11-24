@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Text;
 
 namespace TankaiServer.Classes.AbstractFactory
 {
-    class SmallDrebejimas : AbstractDrebejimas
+    class SmallDrebejimas : Drebejimas
     {
         public SmallDrebejimas(int dmg, int posx, int posy) : base(dmg, posx, posy)
         {
-            type = 5;
+            type = 6;
         }
         public SmallDrebejimas(string id, int dmg, int posx, int posy) : base(id, dmg, posx, posy)
         {
-            type = 5;
+            type = 6;
         }
         public SmallDrebejimas()
         {
-            type = 5;
+            type = 6;
         }
     }
 }

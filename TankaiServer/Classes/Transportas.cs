@@ -68,6 +68,18 @@ namespace Classes
             positionx = pos[0];
             positiony = pos[1];
         }
+        public int GetHealth()
+        {
+            return healthPoints;
+        }
+        public void SetHealth(int dmg)
+        {
+            this.healthPoints = dmg;
+        }
+        public int Gettipas()
+        {
+            return type;
+        }
     }
 
     public class TransportasBinder : IModelBinder
