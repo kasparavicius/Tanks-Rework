@@ -454,7 +454,10 @@ namespace TanksRework
             if (textBox2.Text != null)
             {
                 playeris = new TransportasFactory().CreateTransportas(comboBox1.SelectedIndex+1, textBox2.Text);
-
+                if (comboBox1.SelectedIndex + 1 == 1 || comboBox1.SelectedIndex + 1 == 2)
+                {
+                    button6.Visible = true;
+                }
                 restas.UseNewtonsoftJson();
 
                 //Postas
@@ -679,6 +682,46 @@ namespace TanksRework
                 richTextBox2.SelectionStart = richTextBox2.Text.Length;
                 richTextBox2.ScrollToCaret();
             }
+        }
+
+        /// <summary>
+        /// Used to convert Tank or Ship to a Plane (STATE design pattern)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            int hp = playeris.healthPoints;
+            int posx = playeris.positionx;
+            int posy = playeris.positiony;
+            string id = playeris._id;
+            string name = playeris.name;
+            playeris = new TransportasFactory().SetTransportasToLektuvas(id, name, hp, posx, posy);
+
+            //restas.UseNewtonsoftJson();
+
+            ////Postas
+            //IRestRequest request = new RestRequest()
+            //{
+            //    Resource = "https://localhost:44356/Tankas/Connect/"
+            //};
+
+            //var test = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
+
+            //request.AddHeader("Content-Type", "application/json");
+            //request.AddHeader("Accept", "application/xml");
+            ////request.AddJsonBody(test);
+            //request.AddParameter("application/json", test, ParameterType.RequestBody);
+
+            //IRestResponse<string> response = restas.Post<string>(request);
+            //playeris.setId(response.Data);// = response.Data;
+            //                              //zaidejas._id = playerId;
+            //                              //label2.Text = test;
+            //richTextBox1.Text = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
+            ////label1.Text = JsonConvert.DeserializeObject<Transportas>(test, serializerSettings).getId();
+            ////DisplayPlayer(100, 100);
+            button6.Visible = false;
+            LoadEnemyList();
         }
     }
 }

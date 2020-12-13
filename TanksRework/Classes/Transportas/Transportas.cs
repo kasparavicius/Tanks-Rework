@@ -13,11 +13,11 @@ namespace Classes
     public abstract class Transportas : Observer.Subject, Observer.IObserver
     {
         [JsonProperty]
-        private string _id { get; set; }
+        public string _id { get; set; }
         [JsonProperty]
-        private string name { get; set; }
+        public string name { get; set; }
         [JsonProperty]
-        private int healthPoints { get; set; }
+        public int healthPoints { get; set; }
         [JsonProperty]
         private int damage { get; set; }
         [JsonProperty]

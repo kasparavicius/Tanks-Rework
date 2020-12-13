@@ -28,5 +28,10 @@ namespace Classes
                     return null;
             }
         }
+
+        public Transportas SetTransportasToLektuvas(string id, string trName, int hp, int x, int y)
+        {
+            return new LektuvasTransportas(id, trName, hp, 10, x, y);
+        }
     }
 }
