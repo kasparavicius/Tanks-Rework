@@ -54,6 +54,7 @@ namespace TanksRework
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.button6 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +67,7 @@ namespace TanksRework
             this.button1.TabIndex = 0;
             this.button1.Text = "right";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
@@ -77,6 +79,7 @@ namespace TanksRework
             this.button2.TabIndex = 0;
             this.button2.Text = "left";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
@@ -88,6 +91,7 @@ namespace TanksRework
             this.button3.TabIndex = 0;
             this.button3.Text = "up";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
@@ -99,6 +103,7 @@ namespace TanksRework
             this.button4.TabIndex = 0;
             this.button4.Text = "down";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // groupBox2
@@ -256,11 +261,23 @@ namespace TanksRework
             this.label3.TabIndex = 15;
             this.label3.Text = "Nickname:";
             // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(198, 515);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(87, 31);
+            this.button9.TabIndex = 16;
+            this.button9.Text = "Memento";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Visible = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1128, 585);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox2);
@@ -312,6 +329,7 @@ namespace TanksRework
         private Timer timer3;
         private Button button6;
         private Label label3;
+        private Button button9;
     }
 }
 

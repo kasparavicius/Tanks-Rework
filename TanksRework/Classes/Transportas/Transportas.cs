@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using TanksRework.Classes.Strategy;
 using System.Drawing;
 using TanksRework.Classes.VisualProxy;
+using TanksRework.Classes.Memento;
 
 namespace Classes
 {
@@ -32,6 +33,8 @@ namespace Classes
         public IJudejimas _strategy { get; set; }
 
         public ImageInterface image = new ProxyImage("assets\\tankas2d.png");
+
+        List<Memento> mementos = new List<Memento>();
 
 
         public Transportas(String nam, int hp, int dmg, int posx, int posy)
@@ -79,9 +82,23 @@ namespace Classes
 
         public void Move(int x, int y, int[,] zemelapis)
         {
+            Memento temp = new Memento(this.positionx, this.positiony);
+            mementos.Add(temp);
             var positions = _strategy.Move(x, y, this.positionx, this.positiony, zemelapis);
             this.positionx = positions.Item1;
             this.positiony = positions.Item2;
+        }
+
+        public void MementoMethod()
+        {
+            var temp = mementos[mementos.Count - 5].getSavedPosition();
+            this.positionx = temp.Item1;
+            this.positiony = temp.Item2;
+        }
+
+        public bool CanYouDoMemento()
+        {
+            return mementos.Count >= 5;
         }
     }
 }

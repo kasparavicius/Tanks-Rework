@@ -206,6 +206,10 @@ namespace TanksRework
         }
         private void updatePlayerDetails()
         {
+            if (playeris.CanYouDoMemento())
+            {
+                button9.Visible = true;
+            }
             //updateEnemiesDetails();
             /*IRestClient restClient = new RestClient();
             IRestRequest request = new RestRequest()
@@ -454,7 +458,7 @@ namespace TanksRework
             if (textBox2.Text != null)
             {
                 playeris = new TransportasFactory().CreateTransportas(comboBox1.SelectedIndex+1, textBox2.Text);
-                if (comboBox1.SelectedIndex + 1 == 1 || comboBox1.SelectedIndex + 1 == 2)
+                if (playeris.type == 1 || playeris.type == 2)
                 {
                     button6.Visible = true;
                 }
@@ -483,6 +487,10 @@ namespace TanksRework
                 button8.Visible = false;
                 textBox2.Enabled = false;
                 comboBox1.Enabled = false;
+                button1.Visible = true;
+                button2.Visible = true;
+                button3.Visible = true;
+                button4.Visible = true;
                 LoadEnemyList();
             }
         }
@@ -725,6 +733,11 @@ namespace TanksRework
             ////DisplayPlayer(100, 100);
             button6.Visible = false;
             LoadEnemyList();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            playeris.MementoMethod();
         }
     }
 }
