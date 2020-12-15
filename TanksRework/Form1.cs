@@ -480,7 +480,9 @@ namespace TanksRework
                 richTextBox1.Text = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
                 //label1.Text = JsonConvert.DeserializeObject<Transportas>(test, serializerSettings).getId();
                 //DisplayPlayer(100, 100);
-
+                button8.Visible = false;
+                textBox2.Enabled = false;
+                comboBox1.Enabled = false;
                 LoadEnemyList();
             }
         }

@@ -53,6 +53,7 @@ namespace TanksRework
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.button6 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,11 +148,11 @@ namespace TanksRework
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(690, 287);
+            this.label2.Location = new System.Drawing.Point(328, 510);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 20);
+            this.label2.Size = new System.Drawing.Size(158, 20);
             this.label2.TabIndex = 6;
-            this.label2.Text = "label2";
+            this.label2.Text = "Choose your transport:";
             // 
             // button7
             // 
@@ -166,21 +167,21 @@ namespace TanksRework
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(625, 539);
+            this.button8.Location = new System.Drawing.Point(624, 537);
             this.button8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(86, 31);
             this.button8.TabIndex = 8;
-            this.button8.Text = "button8";
+            this.button8.Text = "Connect";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(504, 539);
+            this.textBox2.Location = new System.Drawing.Point(505, 539);
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(114, 27);
+            this.textBox2.Size = new System.Drawing.Size(113, 27);
             this.textBox2.TabIndex = 9;
             // 
             // timer1
@@ -190,7 +191,7 @@ namespace TanksRework
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(690, 397);
+            this.label1.Location = new System.Drawing.Point(678, 211);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 20);
             this.label1.TabIndex = 10;
@@ -198,7 +199,7 @@ namespace TanksRework
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(745, 424);
+            this.richTextBox1.Location = new System.Drawing.Point(883, 208);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(244, 151);
@@ -212,10 +213,10 @@ namespace TanksRework
             "Laivas",
             "Tankas",
             "Lektuvas"});
-            this.comboBox1.Location = new System.Drawing.Point(961, 287);
+            this.comboBox1.Location = new System.Drawing.Point(505, 507);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(138, 28);
+            this.comboBox1.Size = new System.Drawing.Size(113, 28);
             this.comboBox1.TabIndex = 12;
             // 
             // panel1
@@ -246,11 +247,21 @@ namespace TanksRework
             this.button6.Visible = false;
             this.button6.Click += new System.EventHandler(this.button6_Click_1);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(328, 542);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(78, 20);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Nickname:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1128, 585);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
@@ -300,6 +311,7 @@ namespace TanksRework
         private RichTextBox richTextBox2;
         private Timer timer3;
         private Button button6;
+        private Label label3;
     }
 }
 

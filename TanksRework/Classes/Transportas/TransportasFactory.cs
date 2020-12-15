@@ -25,7 +25,7 @@ namespace Classes
                         return new LektuvasTransportas(trName, 100, 10, rnd.Next(1, 15), rnd.Next(1, 15) );
                     }
                 default:
-                    return null;
+                    return new TankasTransportas(trName, 80, 12, rnd.Next(1, 9), rnd.Next(1, 15));
             }
         }
 
