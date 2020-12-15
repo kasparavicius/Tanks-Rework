@@ -597,13 +597,14 @@ namespace TanksRework
                     for (int j = 0; j < zemelapis.sizeY; j++)
                     {
                         g.DrawImage(mapTextures[i, j], i * langelioPlotis + 1, j * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+                        
                     }
                 }
                 GetMap();
 
 
                 if (playeris != null)
-                    g.DrawImage(tankasImg, playeris.positionx * langelioPlotis + 1, playeris.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+                    g.DrawImage(playeris.image.GetImage(), playeris.positionx * langelioPlotis + 1, playeris.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
 
                 if (!(priesai is null) && priesai.Count > 0)
                 {

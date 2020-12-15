@@ -6,6 +6,8 @@ using RestSharp.Serializers.NewtonsoftJson;
 using RestSharp;
 using Newtonsoft.Json;
 using TanksRework.Classes.Strategy;
+using System.Drawing;
+using TanksRework.Classes.VisualProxy;
 
 namespace Classes
 {
@@ -28,6 +30,8 @@ namespace Classes
         public int type { get; set; }
         [JsonProperty]
         public IJudejimas _strategy { get; set; }
+
+        public ImageInterface image = new ProxyImage("assets\\tankas2d.png");
 
 
         public Transportas(String nam, int hp, int dmg, int posx, int posy)
