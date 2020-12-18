@@ -25,12 +25,13 @@ using TankaiRework.Commander;
 using TanksRework.Classes.Zemelapis;
 using TanksRework.Classes.Adapter;
 using TankaiRework.Classes.Messages;
+using TanksRework.Classes.ChainOfResponsibility;
 
 namespace TanksRework
 {
     public partial class Form1 : Form
     {
-
+        AbstractLogger loggerChain = getChainOfLoggers();
         int[,] oldMap;
         Zemelapis zemelapis = new Zemelapis(new int[15, 15]);
         List<Player> enemies = new List<Player>();
@@ -464,6 +465,8 @@ namespace TanksRework
                 }
                 restas.UseNewtonsoftJson();
 
+                loggerChain.logMessage(AbstractLogger.ERROR, "THIS IS TESTING ERROR MESSAGE");
+
                 //Postas
                 IRestRequest request = new RestRequest()
                 {
@@ -492,6 +495,7 @@ namespace TanksRework
                 button3.Visible = true;
                 button4.Visible = true;
                 LoadEnemyList();
+                
             }
         }
 
@@ -738,6 +742,18 @@ namespace TanksRework
         private void button9_Click(object sender, EventArgs e)
         {
             playeris.MementoMethod();
+        }
+
+        private static AbstractLogger getChainOfLoggers()
+        {
+            AbstractLogger infoLog = new InfoLogger(AbstractLogger.INFO);
+            AbstractLogger fileLog = new FileLogger(AbstractLogger.FILE);
+            AbstractLogger errorLog = new ErrorLogger(AbstractLogger.ERROR);
+
+            errorLog.setNextLogger(fileLog);
+            fileLog.setNextLogger(infoLog);
+
+            return errorLog;
         }
     }
 }
