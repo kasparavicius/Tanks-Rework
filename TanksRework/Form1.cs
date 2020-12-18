@@ -26,11 +26,13 @@ using TanksRework.Classes.Zemelapis;
 using TanksRework.Classes.Adapter;
 using TankaiRework.Classes.Messages;
 using TanksRework.Classes.ChainOfResponsibility;
+using TanksRework.Classes.Iterator;
 
 namespace TanksRework
 {
     public partial class Form1 : Form
     {
+        ConcreteAgg playerNames = new ConcreteAgg();
         AbstractLogger loggerChain = getChainOfLoggers();
         int[,] oldMap;
         Zemelapis zemelapis = new Zemelapis(new int[15, 15]);
@@ -316,6 +318,7 @@ namespace TanksRework
             //var priesopos = restResponse.Content[0];
             priesai.ForEach(p =>
             {
+                playerNames[playerNames.Count - 1] = p.name;
                 playeris.prideti(p);
             });
             //label1.Text = restResponse.Content;
@@ -334,6 +337,7 @@ namespace TanksRework
             {
                 //label1.Text = restResponse.ErrorMessage;
             }
+            UpdateListOfPlayers();
         }
 
         private void UpdateEnemyList()
@@ -382,6 +386,7 @@ namespace TanksRework
             });
             nauji.ForEach(n =>
             {
+                playerNames[playerNames.Count - 1] = n.name;
                 priesai.Add(n);
                 playeris.prideti(priesai.Last());
             });
@@ -409,6 +414,7 @@ namespace TanksRework
             //var matches = temp.Where(p => p.Name == nameToExtract);
 
             playeris.pranesti(temp);
+            UpdateListOfPlayers();
         }
 
         private void Disconnect()
@@ -463,7 +469,9 @@ namespace TanksRework
                 {
                     button6.Visible = true;
                 }
+                playerNames[0] = playeris.name;
                 restas.UseNewtonsoftJson();
+                UpdateListOfPlayers();
 
                 loggerChain.logMessage(AbstractLogger.ERROR, "THIS IS TESTING ERROR MESSAGE");
 
@@ -754,6 +762,21 @@ namespace TanksRework
             fileLog.setNextLogger(infoLog);
 
             return errorLog;
+        }
+
+        private void UpdateListOfPlayers()
+        {
+            listBox1.Items.Clear();
+
+            Iterator iter = playerNames.CreateIterator();
+
+            object item = iter.First();
+
+            while (item != null)
+            {
+                listBox1.Items.Add(item);
+                item = iter.Next();
+            }
         }
     }
 }

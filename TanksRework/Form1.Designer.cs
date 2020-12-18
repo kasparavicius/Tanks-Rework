@@ -309,9 +309,9 @@ namespace TanksRework
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(799, 367);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 20);
+            this.label6.Size = new System.Drawing.Size(81, 20);
             this.label6.TabIndex = 20;
-            this.label6.Text = "All players";
+            this.label6.Text = "All players:";
             // 
             // Form1
             // 
