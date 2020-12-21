@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "GexQDqsY5awLeXjLbYvyyMzOdh++h5SkRC21Y9IKcqDeCfsY9/d1FruiqjPiDR8Ao81ts+B3mQNhkzkeU5+6WA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
@@ -7,6 +8,15 @@
     "C:\\Users\\Ugnius\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\Ugnius\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
     "C:\\Users\\Ugnius\\.nuget\\packages\\restsharp.serializers.newtonsoftjson\\106.11.7\\restsharp.serializers.newtonsoftjson.106.11.7.nupkg.sha512"
+=======
+  "dgSpecHash": "1564ICynpYUssfjJo3SOw7VsZOF3pxRm2nxl3jy8ncGqGMyhBMaiDN5JUrr6jEknIkWH4ny9D/DcsKcXGYNENA==",
+  "success": true,
+  "projectFilePath": "D:\\Programavimas\\TanksRework\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\KOmpas\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\KOmpas\\.nuget\\packages\\restsharp\\106.11.7\\restsharp.106.11.7.nupkg.sha512",
+    "C:\\Users\\KOmpas\\.nuget\\packages\\restsharp.serializers.newtonsoftjson\\106.11.7\\restsharp.serializers.newtonsoftjson.106.11.7.nupkg.sha512"
+>>>>>>> parent of 954a6ff... Revert "commmitas"
   ],
   "logs": []
 }

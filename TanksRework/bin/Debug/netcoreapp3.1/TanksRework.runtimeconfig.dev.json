@@ -1,9 +1,14 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\Ugnius\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\Ugnius\\.nuget\\packages",
       "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+=======
+      "C:\\Users\\KOmpas\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\KOmpas\\.nuget\\packages"
+>>>>>>> parent of 954a6ff... Revert "commmitas"
     ]
   }
 }

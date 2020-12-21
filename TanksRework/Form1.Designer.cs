@@ -59,6 +59,7 @@ namespace TanksRework
             this.label5 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -314,11 +315,24 @@ namespace TanksRework
             this.label6.TabIndex = 20;
             this.label6.Text = "All players:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(339, 586);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 20);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "label7";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1128, 608);
+<<<<<<< HEAD
+=======
+            this.Controls.Add(this.label7);
+>>>>>>> parent of 954a6ff... Revert "commmitas"
             this.Controls.Add(this.label6);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label5);
@@ -380,6 +394,7 @@ namespace TanksRework
         private Label label5;
         private ListBox listBox1;
         private Label label6;
+        private Label label7;
     }
 }
 
