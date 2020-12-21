@@ -41,6 +41,7 @@ namespace TanksRework
         Player zaidejas = new Player();
         NormalFountain fountain;
         RestoreFountainAdapter resfount;
+        Tuple<float, float> cellSizes = new Tuple<float, float>(0, 0);
 
         Transportas playeris;// = new TransportasFactory().CreateTransportas(1, "nuva");
         List<Transportas> priesai;
@@ -121,6 +122,25 @@ namespace TanksRework
             ginklas.AddPowerUp(1);
             ginklas.AddPowerUp(2);
             richTextBox1.Text += $"Double fire + explosion zala {ginklas.GetZala()}\n";
+
+
+            //Flyweight test
+            string paprastos = "file.png";
+            string firekulkos = "file.png";
+            string explokulkos = "file.png";
+
+            //Uzkraunam teksturas
+            var factory = new KulkosFlyweightFactory(
+                new PaprastosKulkos(paprastos),
+                new PaprastosKulkos(firekulkos),
+                new PaprastosKulkos(explokulkos)
+            );
+
+            var saunamaKulka = new PaprastosKulkos(5, 6, paprastos);
+            var flyweight = factory.GetKulkosFlyweight(new PaprastosKulkos(saunamaKulka.texture));
+            richTextBox1.Text += $"Flyweight test:\n";
+            richTextBox1.Text += flyweight.Operation(saunamaKulka);//Naudoti atvaizduojant kulka. TODO: pakeist metoda taip, kad grazintu koor ir textura
+
 
 
             TankasTransportas zaidejas3 = new TankasTransportas("Zaidejas", 100, 10, 5, 5 );
@@ -602,6 +622,7 @@ namespace TanksRework
             var gridSize = 15;
             var langelioPlotis  = (float)plotis  / gridSize;
             var langelioAukstis = (float)aukstis / gridSize;
+            cellSizes = new Tuple<float, float>(langelioPlotis, langelioAukstis);
 
             for (int i = 1; i < gridSize; i++)
             {
@@ -777,6 +798,11 @@ namespace TanksRework
                 listBox1.Items.Add(item);
                 item = iter.Next();
             }
+        }
+
+        public void MouseDownOnPanel(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text = $"Mouse pos x: {(int)(e.X / cellSizes.Item1)}\nMouse pos y: {(int)(e.Y / cellSizes.Item2)}";
         }
     }
 }
