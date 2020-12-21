@@ -119,40 +119,10 @@ namespace Classes
             UpdateEnemyHealthPoints();
         }
 
-        public void GetDamage(int dmg)
-        {
-            healthPoints -= dmg;
-            UpdateEnemyHealthPoints();
-        }
+        public abstract void GetDamage(int dmg);
+       
+        public abstract void UpdateEnemyHealthPoints();
 
-        public void UpdateEnemyHealthPoints()
-        {
-            IRestClient restas = new RestClient();
-
-            JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
-            {
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
-            };
-            //playeris = new TransportasFactory().CreateTransportas(comboBox1.SelectedIndex + 1, textBox2.Text);
-
-            restas.UseNewtonsoftJson();
-
-            //Postinam savo pozicija
-            IRestRequest request = new RestRequest()
-            {
-                Resource = "https://localhost:44356/Tankas/DealDamage/"
-            };
-
-            var test = JsonConvert.SerializeObject(this, Formatting.Indented, serializerSettings);
-           // test.Content = test.Content.Replace("TanksRework", "TankaiServer");
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Accept", "application/xml");
-            //request.AddJsonBody(test);
-            request.AddParameter("application/json", test, ParameterType.RequestBody);
-
-            restas.Post<string>(request);
-        }
 
         public void MediatorActions(bool hitormiss, Transportas tr, AbstractLogger logger)
         {
@@ -165,6 +135,13 @@ namespace Classes
             {
                 logger.logMessage(AbstractLogger.INFO, "You missed");
             }
+        }
+
+        public void getDamageTemplate(int dmg)
+        {
+            this.GetDamage(dmg);
+
+            this.UpdateEnemyHealthPoints();
         }
 
 

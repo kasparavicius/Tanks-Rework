@@ -21,7 +21,8 @@ namespace TanksRework.Classes.Mediator
         {
             if (ev == "ATT")
             {
-                this.comp2.GetDamage(10);
+                this.comp2.getDamageTemplate(comp1.damage);
+               
                 
             }
             if (ev == "HEAL")
