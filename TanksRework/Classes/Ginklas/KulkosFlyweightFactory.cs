@@ -21,7 +21,7 @@ namespace TankaiRework.ER
         {
             List<string> elements = new List<string>();
 
-            elements.Add(key.texture);
+            elements.Add(key.texture.ToString());
 
             //elements.Sort();
 

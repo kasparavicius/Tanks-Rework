@@ -1,18 +1,25 @@
-/**
- * @(#) PaprastosKulkos.cs
- */
 
+
+using System.Drawing;
+/**
+* @(#) PaprastosKulkos.cs
+*/
 namespace TankaiRework.ER
 {
 	public class PaprastosKulkos : Kulkos
 	{
-		public PaprastosKulkos(int x, int y, string txture)
+		public PaprastosKulkos(int x, int y, Image txture)
 		{
 			cordx = x;
 			cordy = y;
 			texture = txture;
 		}
-		public PaprastosKulkos(string txture)
+		public PaprastosKulkos(int x, int y)
+		{
+			cordx = x;
+			cordy = y;
+		}
+		public PaprastosKulkos(Image txture)
 		{
 			texture = txture;
 		}

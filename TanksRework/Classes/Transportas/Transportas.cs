@@ -11,6 +11,7 @@ using TanksRework.Classes.VisualProxy;
 using TanksRework.Classes.Memento;
 using TanksRework.Classes.Mediator;
 using TanksRework.Classes.ChainOfResponsibility;
+using TankaiRework.ER;
 
 namespace Classes
 {
@@ -33,6 +34,8 @@ namespace Classes
         public int type { get; set; }
         [JsonProperty]
         public IJudejimas _strategy { get; set; }
+        [JsonProperty]
+        public Ginklas ginklas { get; set; }
 
         public ImageInterface image = new ProxyImage("assets\\tankas2d.png");
 

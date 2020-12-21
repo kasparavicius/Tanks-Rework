@@ -43,6 +43,8 @@ namespace TanksRework
         NormalFountain fountain;
         RestoreFountainAdapter resfount;
         Tuple<float, float> cellSizes = new Tuple<float, float>(0, 0);
+        List<Kulkos> kulkosOnMap = new List<Kulkos>();
+        KulkosFlyweightFactory kulkosFactory;
 
         Transportas playeris;// = new TransportasFactory().CreateTransportas(1, "nuva");
         List<Transportas> priesai;
@@ -76,6 +78,10 @@ namespace TanksRework
         Image fountainImg = new Bitmap("assets\\normalfountain.png");
         Image RestoreImg = new Bitmap("assets\\restorefountain.png");
         Image[,] mapTextures = new Image[15,15];
+
+        Image kulkosPaprastos = new Bitmap("assets\\normalfountain.png");//Pakeisti kulku paveiksliukus
+        Image kulkosFire = new Bitmap("assets\\normalfountain.png");
+        Image kulkosExplo = new Bitmap("assets\\normalfountain.png");
 
 
         public Form1()
@@ -126,21 +132,18 @@ namespace TanksRework
 
 
             //Flyweight test
-            string paprastos = "file.png";
-            string firekulkos = "file.png";
-            string explokulkos = "file.png";
 
             //Uzkraunam teksturas
-            var factory = new KulkosFlyweightFactory(
-                new PaprastosKulkos(paprastos),
-                new PaprastosKulkos(firekulkos),
-                new PaprastosKulkos(explokulkos)
+            kulkosFactory = new KulkosFlyweightFactory(
+                new PaprastosKulkos(kulkosPaprastos),
+                new PaprastosKulkos(kulkosFire),
+                new PaprastosKulkos(kulkosExplo)
             );
 
-            var saunamaKulka = new PaprastosKulkos(5, 6, paprastos);
-            var flyweight = factory.GetKulkosFlyweight(new PaprastosKulkos(saunamaKulka.texture));
-            richTextBox1.Text += $"Flyweight test:\n";
-            richTextBox1.Text += flyweight.Operation(saunamaKulka);//Naudoti atvaizduojant kulka. TODO: pakeist metoda taip, kad grazintu koor ir textura
+            var saunamaKulka = new PaprastosKulkos(5, 6);
+            var flyweight = kulkosFactory.GetKulkosFlyweight(new PaprastosKulkos(kulkosPaprastos));
+            //richTextBox1.Text += $"Flyweight test:\n";
+            //richTextBox1.Text += flyweight.Operation(saunamaKulka);//Naudoti atvaizduojant kulka. TODO: pakeist metoda taip, kad grazintu koor ir textura
 
 
 
@@ -672,6 +675,13 @@ namespace TanksRework
                         g.DrawImage(priesasImg, pries.positionx * langelioPlotis + 1, pries.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
                     });
                 }
+
+                var flyweight = kulkosFactory.GetKulkosFlyweight(new PaprastosKulkos(kulkosPaprastos));
+                kulkosOnMap.ForEach(k =>
+                {
+                    g.DrawImage(flyweight.Operation(k).Item3, flyweight.Operation(k).Item1 * langelioPlotis + 1, flyweight.Operation(k).Item2 * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
+                });
+
             }
             if (playeris != null && fountain != null)
             {
@@ -681,6 +691,7 @@ namespace TanksRework
             {
                 g.DrawImage(RestoreImg, resfount.fountain.positionx * langelioPlotis + 1, resfount.fountain.positiony * langelioAukstis + 1, langelioPlotis - 2, langelioAukstis - 2);
             }
+
         }
 
         //Send msg
@@ -811,6 +822,25 @@ namespace TanksRework
 
         public void MouseDownOnPanel(object sender, MouseEventArgs e)
         {
+
+            var saunamaKulka = new PaprastosKulkos((int)(e.X / cellSizes.Item1), (int)(e.Y / cellSizes.Item2));
+            //var flyweight = kulkosFactory.GetKulkosFlyweight(new PaprastosKulkos(kulkosPaprastos));
+            kulkosOnMap.Add(saunamaKulka);
+
+            var thread = new System.Threading.Thread(p =>
+            {
+                lock (kulkosOnMap)
+                {
+                    Action action = () =>
+                    {
+                        kulkosOnMap.Remove(saunamaKulka);
+                    };
+                    System.Threading.Thread.Sleep(1000);
+                    this.Invoke(action);
+                }
+            });
+            thread.Start();
+
             label7.Text = playeris.healthPoints.ToString();
             richTextBox1.Text = $"Mouse pos x: {(int)(e.X / cellSizes.Item1)}\nMouse pos y: {(int)(e.Y / cellSizes.Item2)}";
             int x = (int)(e.X / cellSizes.Item1);
