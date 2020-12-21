@@ -673,8 +673,25 @@ namespace TanksRework
             if (textBox1.Text != null)
             {
                 //TankaiRework.Classes.Messages.Message msg = new TankaiRework.Classes.Messages.Message(playeris.getId(), playeris.getName(), textBox1.Text);
-                TankaiRework.Classes.Messages.Message msg = new TankaiRework.Classes.Messages.Message(playeris is null ? "guest" : playeris.getId(), playeris is null ? "Guest" : playeris.getName(), textBox1.Text);
 
+                TankaiRework.Classes.Messages.Message msg = new TankaiRework.Classes.Messages.Message(playeris is null ? "guest" : playeris.getId(), playeris is null ? "Guest" : playeris.getName(), textBox1.Text);
+                List<AbstractExpression> objExpressions = new List<AbstractExpression>();
+                string[] strArray = msg.message.Split(' ');
+                foreach (var item in strArray)
+                {
+                    if (item == "NOOB")
+                    {
+                        objExpressions.Add(new InsultingExpressions());
+                    }
+                    if (item == "FUCK")
+                    {
+                        objExpressions.Add(new SwearingExpressions());
+                    }
+                }
+                foreach (var obj in objExpressions)
+                {
+                    obj.Evaluate(msg);
+                }
                 restas.UseNewtonsoftJson();
 
                 //Postas
@@ -682,7 +699,6 @@ namespace TanksRework
                 {
                     Resource = "https://localhost:44356/api/message/"
                 };
-
                 var test = JsonConvert.SerializeObject(msg, Formatting.Indented);
 
                 request.AddHeader("Content-Type", "application/json");
