@@ -14,7 +14,7 @@ namespace TankaiRework.Classes.Messages
         {
 
         }
-
+        
         public Message(string id, string name, string message)
         {
             this._id = id;
