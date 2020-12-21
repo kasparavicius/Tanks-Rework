@@ -1,8 +1,14 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
+<<<<<<< HEAD
       "C:\\Users\\Fartas\\.dotnet\\store\\|arch|\\|tfm|",
       "C:\\Users\\Fartas\\.nuget\\packages"
+=======
+      "C:\\Users\\Ugnius\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Ugnius\\.nuget\\packages",
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+>>>>>>> origin/master
     ]
   }
 }

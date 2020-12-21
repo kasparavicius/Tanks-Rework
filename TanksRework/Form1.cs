@@ -309,27 +309,39 @@ namespace TanksRework
         // up
         private void button3_Click(object sender, EventArgs e)
         {
+            if (playeris.healthPoints > 0)
+            {
             commandsStack.Add(new MoveUp(playeris, zemelapis.matrix));
             //updatePlayerDetails();
+            }
         }
         //left
         private void button2_Click(object sender, EventArgs e)
         {
-            commandsStack.Add(new MoveLeft(playeris, zemelapis.matrix));
-            //updatePlayerDetails();
+            if (playeris.healthPoints > 0)
+            {
+                commandsStack.Add(new MoveLeft(playeris, zemelapis.matrix));
+                //updatePlayerDetails();
+            }
         }
         //right
         private void button1_Click(object sender, EventArgs e)
         {
-            commandsStack.Add(new MoveRight(playeris, zemelapis.matrix));
-            //updatePlayerDetails();
+            if (playeris.healthPoints > 0)
+            {
+                commandsStack.Add(new MoveRight(playeris, zemelapis.matrix));
+                //updatePlayerDetails();
+            }
             
         }
         //down
         private void button4_Click(object sender, EventArgs e)
         {
-            commandsStack.Add(new MoveDown(playeris, zemelapis.matrix));
-            //updatePlayerDetails();
+            if (playeris.healthPoints > 0)
+            {
+                commandsStack.Add(new MoveDown(playeris, zemelapis.matrix));
+                //updatePlayerDetails();
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -606,7 +618,8 @@ namespace TanksRework
             {
                 //MessageBox.Show($"Blet primaigei nesamoniu");
                 //e.Handled = true;
-
+                if (playeris.healthPoints > 0)
+                {
                 switch (Char.ToLower(e.KeyChar))
                 {
                     case 'w':
@@ -623,6 +636,7 @@ namespace TanksRework
                         break;
                     default:
                         break;
+                }
                 }
                 //command.Execute();
                 //updatePlayerDetails();
