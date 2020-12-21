@@ -41,6 +41,15 @@ namespace TankaiServer.Controllers
             return test;
         }
 
+        [System.Web.Http.HttpGet]
+        public int GetCurrentPlayerHealth(string id)
+        {
+            List<Transportas> zaidejai = (List<Transportas>)System.Web.HttpContext.Current.Application["zaidejai"];
+           
+
+            return zaidejai.Find(z => z.getId() == id).healthPoints;
+        }
+
         [System.Web.Http.HttpPost]
         public ActionResult Connect([FromBody] Transportas value)
         {
@@ -84,6 +93,25 @@ namespace TankaiServer.Controllers
                 {
                     z.updated = false;
                 }
+            });
+
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application["zaidejai"] = zaidejai;
+            System.Web.HttpContext.Current.Application.UnLock();
+            return Json(msg);
+        }
+
+
+        [System.Web.Http.HttpPatch]
+        public ActionResult DealDamage([FromBody] Transportas value)
+        {
+            string msg = "hello";
+            List<Transportas> zaidejai = (List<Transportas>)System.Web.HttpContext.Current.Application["zaidejai"];
+
+            zaidejai.Find(z => z.getId() == value.getId()).SetHealth(value.healthPoints);
+            zaidejai.ForEach(z =>
+            {
+                z.updated = false;
             });
 
             System.Web.HttpContext.Current.Application.Lock();

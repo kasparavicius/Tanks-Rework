@@ -59,14 +59,16 @@ namespace TanksRework
             this.label5 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(174, 415);
+            this.button1.Location = new System.Drawing.Point(199, 553);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(86, 31);
             this.button1.TabIndex = 0;
             this.button1.Text = "right";
             this.button1.UseVisualStyleBackColor = true;
@@ -75,9 +77,10 @@ namespace TanksRework
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 415);
+            this.button2.Location = new System.Drawing.Point(14, 553);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(86, 31);
             this.button2.TabIndex = 0;
             this.button2.Text = "left";
             this.button2.UseVisualStyleBackColor = true;
@@ -86,9 +89,10 @@ namespace TanksRework
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(93, 386);
+            this.button3.Location = new System.Drawing.Point(106, 515);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(86, 31);
             this.button3.TabIndex = 0;
             this.button3.Text = "up";
             this.button3.UseVisualStyleBackColor = true;
@@ -97,9 +101,10 @@ namespace TanksRework
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(93, 415);
+            this.button4.Location = new System.Drawing.Point(106, 553);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(86, 31);
             this.button4.TabIndex = 0;
             this.button4.Text = "down";
             this.button4.UseVisualStyleBackColor = true;
@@ -111,9 +116,11 @@ namespace TanksRework
             this.groupBox2.Controls.Add(this.richTextBox2);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Location = new System.Drawing.Point(593, 12);
+            this.groupBox2.Location = new System.Drawing.Point(678, 16);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(428, 138);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Size = new System.Drawing.Size(489, 184);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Chat";
@@ -122,24 +129,27 @@ namespace TanksRework
             // 
             this.richTextBox2.BackColor = System.Drawing.SystemColors.Control;
             this.richTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox2.Location = new System.Drawing.Point(1, 23);
+            this.richTextBox2.Location = new System.Drawing.Point(1, 31);
+            this.richTextBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(380, 86);
+            this.richTextBox2.Size = new System.Drawing.Size(434, 115);
             this.richTextBox2.TabIndex = 3;
             this.richTextBox2.Text = "";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(0, 115);
+            this.textBox1.Location = new System.Drawing.Point(0, 153);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(301, 23);
+            this.textBox1.Size = new System.Drawing.Size(343, 27);
             this.textBox1.TabIndex = 2;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(307, 115);
+            this.button5.Location = new System.Drawing.Point(351, 153);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(86, 31);
             this.button5.TabIndex = 0;
             this.button5.Text = "Send";
             this.button5.UseVisualStyleBackColor = true;
@@ -148,17 +158,18 @@ namespace TanksRework
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(287, 382);
+            this.label2.Location = new System.Drawing.Point(328, 509);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 15);
+            this.label2.Size = new System.Drawing.Size(158, 20);
             this.label2.TabIndex = 6;
             this.label2.Text = "Choose your transport:";
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(887, 404);
+            this.button7.Location = new System.Drawing.Point(1014, 539);
+            this.button7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.Size = new System.Drawing.Size(86, 31);
             this.button7.TabIndex = 7;
             this.button7.Text = "Exit";
             this.button7.UseVisualStyleBackColor = true;
@@ -166,9 +177,10 @@ namespace TanksRework
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(546, 403);
+            this.button8.Location = new System.Drawing.Point(624, 537);
+            this.button8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.Size = new System.Drawing.Size(86, 31);
             this.button8.TabIndex = 8;
             this.button8.Text = "Connect";
             this.button8.UseVisualStyleBackColor = true;
@@ -176,9 +188,10 @@ namespace TanksRework
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(442, 404);
+            this.textBox2.Location = new System.Drawing.Point(505, 539);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(99, 23);
+            this.textBox2.Size = new System.Drawing.Size(113, 27);
             this.textBox2.TabIndex = 9;
             // 
             // timer1
@@ -188,17 +201,18 @@ namespace TanksRework
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(593, 158);
+            this.label1.Location = new System.Drawing.Point(678, 211);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.Size = new System.Drawing.Size(50, 20);
             this.label1.TabIndex = 10;
             this.label1.Text = "label1";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(773, 156);
+            this.richTextBox1.Location = new System.Drawing.Point(883, 208);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(214, 114);
+            this.richTextBox1.Size = new System.Drawing.Size(244, 151);
             this.richTextBox1.TabIndex = 11;
             this.richTextBox1.Text = "";
             // 
@@ -209,16 +223,18 @@ namespace TanksRework
             "Laivas",
             "Tankas",
             "Lektuvas"});
-            this.comboBox1.Location = new System.Drawing.Point(442, 380);
+            this.comboBox1.Location = new System.Drawing.Point(505, 507);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(99, 23);
+            this.comboBox1.Size = new System.Drawing.Size(113, 28);
             this.comboBox1.TabIndex = 12;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(58, 55);
+            this.panel1.Location = new System.Drawing.Point(66, 73);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(429, 284);
+            this.panel1.Size = new System.Drawing.Size(490, 379);
             this.panel1.TabIndex = 13;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDownOnPanel);
@@ -233,10 +249,9 @@ namespace TanksRework
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(12, 386);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button6.Location = new System.Drawing.Point(14, 515);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 22);
+            this.button6.Size = new System.Drawing.Size(86, 29);
             this.button6.TabIndex = 14;
             this.button6.Text = "To Plane";
             this.button6.UseVisualStyleBackColor = true;
@@ -246,18 +261,17 @@ namespace TanksRework
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(287, 406);
+            this.label3.Location = new System.Drawing.Point(328, 541);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 15);
+            this.label3.Size = new System.Drawing.Size(78, 20);
             this.label3.TabIndex = 15;
             this.label3.Text = "Nickname:";
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(173, 386);
-            this.button9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button9.Location = new System.Drawing.Point(198, 515);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(76, 23);
+            this.button9.Size = new System.Drawing.Size(87, 31);
             this.button9.TabIndex = 16;
             this.button9.Text = "Memento";
             this.button9.UseVisualStyleBackColor = true;
@@ -267,9 +281,9 @@ namespace TanksRework
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(58, 345);
+            this.label4.Location = new System.Drawing.Point(66, 460);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 15);
+            this.label4.Size = new System.Drawing.Size(0, 20);
             this.label4.TabIndex = 17;
             // 
             // label5
@@ -278,35 +292,44 @@ namespace TanksRework
             this.label5.BackColor = System.Drawing.SystemColors.Control;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(12, 20);
+            this.label5.Location = new System.Drawing.Point(14, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 25);
+            this.label5.Size = new System.Drawing.Size(0, 31);
             this.label5.TabIndex = 18;
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(773, 275);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(883, 367);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(214, 109);
+            this.listBox1.Size = new System.Drawing.Size(244, 144);
             this.listBox1.TabIndex = 19;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(699, 275);
+            this.label6.Location = new System.Drawing.Point(799, 367);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 15);
+            this.label6.Size = new System.Drawing.Size(81, 20);
             this.label6.TabIndex = 20;
             this.label6.Text = "All players:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(339, 586);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 20);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "label7";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(987, 456);
+            this.ClientSize = new System.Drawing.Size(1128, 608);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label5);
@@ -329,6 +352,7 @@ namespace TanksRework
             this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Exit";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -367,6 +391,7 @@ namespace TanksRework
         private Label label5;
         private ListBox listBox1;
         private Label label6;
+        private Label label7;
     }
 }
 

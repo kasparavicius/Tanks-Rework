@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TanksRework.Classes.ChainOfResponsibility
 {
-    abstract class AbstractLogger
+    public abstract class AbstractLogger
     {
         public static int INFO = 1;
         public static int FILE = 2;

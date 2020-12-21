@@ -27,6 +27,7 @@ using TanksRework.Classes.Adapter;
 using TankaiRework.Classes.Messages;
 using TanksRework.Classes.ChainOfResponsibility;
 using TanksRework.Classes.Iterator;
+using TanksRework.Classes.Mediator;
 
 namespace TanksRework
 {
@@ -246,6 +247,21 @@ namespace TanksRework
             request.AddJsonBody(zaidejas);
 
             IRestResponse response = restClient.Patch(request);*/
+
+            IRestRequest restRequest = new RestRequest("https://localhost:44356/Tankas/GetCurrentPlayerHealth/" + playeris.getId());
+            restRequest.AddHeader("Accept", "application/json");
+            IRestResponse<int> restResponse = restas.Get<int>(restRequest);
+
+
+
+
+
+            playeris.healthPoints = int.Parse(restResponse.Content);
+            if (playeris.healthPoints <= 0)
+            {
+                loggerChain.logMessage(AbstractLogger.INFO, "YOU ARE DEAD");
+
+            }
             richTextBox1.Text = $"Naujos koord = {playeris.positionx}, {playeris.positiony}\n";
             panel1.Invalidate();
             
@@ -741,29 +757,6 @@ namespace TanksRework
             string id = playeris._id;
             string name = playeris.name;
             playeris = new TransportasFactory().SetTransportasToLektuvas(id, name, hp, posx, posy);
-
-            //restas.UseNewtonsoftJson();
-
-            ////Postas
-            //IRestRequest request = new RestRequest()
-            //{
-            //    Resource = "https://localhost:44356/Tankas/Connect/"
-            //};
-
-            //var test = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
-
-            //request.AddHeader("Content-Type", "application/json");
-            //request.AddHeader("Accept", "application/xml");
-            ////request.AddJsonBody(test);
-            //request.AddParameter("application/json", test, ParameterType.RequestBody);
-
-            //IRestResponse<string> response = restas.Post<string>(request);
-            //playeris.setId(response.Data);// = response.Data;
-            //                              //zaidejas._id = playerId;
-            //                              //label2.Text = test;
-            //richTextBox1.Text = JsonConvert.SerializeObject(playeris, Formatting.Indented, serializerSettings);
-            ////label1.Text = JsonConvert.DeserializeObject<Transportas>(test, serializerSettings).getId();
-            ////DisplayPlayer(100, 100);
             button6.Visible = false;
             LoadEnemyList();
         }
@@ -802,7 +795,21 @@ namespace TanksRework
 
         public void MouseDownOnPanel(object sender, MouseEventArgs e)
         {
+            label7.Text = playeris.healthPoints.ToString();
             richTextBox1.Text = $"Mouse pos x: {(int)(e.X / cellSizes.Item1)}\nMouse pos y: {(int)(e.Y / cellSizes.Item2)}";
+            int x = (int)(e.X / cellSizes.Item1);
+            int y = (int)(e.Y / cellSizes.Item2);
+
+            foreach (var priesas in priesai)
+            {
+                if (priesas.positionx == x && priesas.positiony == y)
+                {
+                    new ConcreteMediator(playeris, priesas);
+
+                    playeris.MediatorActions(true, priesas, loggerChain);
+                }
+            }
         }
+
     }
 }
