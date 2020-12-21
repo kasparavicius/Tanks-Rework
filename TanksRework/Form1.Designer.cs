@@ -329,10 +329,10 @@ namespace TanksRework
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1128, 608);
-<<<<<<< HEAD
-=======
+
+
             this.Controls.Add(this.label7);
->>>>>>> parent of 954a6ff... Revert "commmitas"
+
             this.Controls.Add(this.label6);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label5);

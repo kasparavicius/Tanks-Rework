@@ -108,39 +108,19 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-    "C:\\Users\\Ugnius\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
-=======
     "C:\\Users\\KOmpas\\.nuget\\packages\\": {}
->>>>>>> parent of 954a6ff... Revert "commmitas"
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
-      "projectName": "TanksRework",
-      "projectPath": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
-      "packagesPath": "C:\\Users\\Ugnius\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ugnius\\Documents\\GitHub\\Tanks-Rework\\TanksRework\\obj\\",
-=======
       "projectUniqueName": "D:\\Programavimas\\TanksRework\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
       "projectName": "TanksRework",
       "projectPath": "D:\\Programavimas\\TanksRework\\Tanks-Rework\\TanksRework\\TanksRework.csproj",
       "packagesPath": "C:\\Users\\KOmpas\\.nuget\\packages\\",
       "outputPath": "D:\\Programavimas\\TanksRework\\Tanks-Rework\\TanksRework\\obj\\",
->>>>>>> parent of 954a6ff... Revert "commmitas"
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-<<<<<<< HEAD
-        "C:\\Users\\Ugnius\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
         "C:\\Users\\KOmpas\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> parent of 954a6ff... Revert "commmitas"
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -195,8 +175,16 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\Programavimas\\TanksRework\\Tanks-Rework\\TanksRework\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
