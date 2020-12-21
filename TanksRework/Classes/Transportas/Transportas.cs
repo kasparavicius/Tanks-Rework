@@ -9,8 +9,6 @@ using TanksRework.Classes.Strategy;
 using System.Drawing;
 using TanksRework.Classes.VisualProxy;
 using TanksRework.Classes.Memento;
-using TanksRework.Classes.Mediator;
-using TanksRework.Classes.ChainOfResponsibility;
 
 namespace Classes
 {
@@ -24,7 +22,7 @@ namespace Classes
         [JsonProperty]
         public int healthPoints { get; set; }
         [JsonProperty]
-        public int damage { get; set; }
+        private int damage { get; set; }
         [JsonProperty]
         public int positionx { get; set; }
         [JsonProperty]
@@ -38,12 +36,7 @@ namespace Classes
 
         List<Memento> mementos = new List<Memento>();
 
-        protected IMediator _mediator;
 
-        public void SetMediator(IMediator mediator)
-        {
-            this._mediator = mediator;
-        }
         public Transportas(String nam, int hp, int dmg, int posx, int posy)
         {
             name = nam;
@@ -85,7 +78,6 @@ namespace Classes
             positionx = updPriesai.Find(p => p.getId() == _id).positionx;
             positiony = updPriesai.Find(p => p.getId() == _id).positiony;
             //if nera tokio id sarase, pridedam prie observeriu?
-
         }
 
         public void Move(int x, int y, int[,] zemelapis)
@@ -106,67 +98,7 @@ namespace Classes
 
         public bool CanYouDoMemento()
         {
-            if (this.healthPoints <= 0)
-            {
-                this.image = new ProxyImage("assets\\blackdead.png");
-            }
             return mementos.Count >= 5;
         }
-
-        public void Heal(int hp)
-        {
-            healthPoints += hp;
-            UpdateEnemyHealthPoints();
-        }
-
-        public void GetDamage(int dmg)
-        {
-            healthPoints -= dmg;
-            UpdateEnemyHealthPoints();
-        }
-
-        public void UpdateEnemyHealthPoints()
-        {
-            IRestClient restas = new RestClient();
-
-            JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
-            {
-                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.All,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
-            };
-            //playeris = new TransportasFactory().CreateTransportas(comboBox1.SelectedIndex + 1, textBox2.Text);
-
-            restas.UseNewtonsoftJson();
-
-            //Postinam savo pozicija
-            IRestRequest request = new RestRequest()
-            {
-                Resource = "https://localhost:44356/Tankas/DealDamage/"
-            };
-
-            var test = JsonConvert.SerializeObject(this, Formatting.Indented, serializerSettings);
-           // test.Content = test.Content.Replace("TanksRework", "TankaiServer");
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Accept", "application/xml");
-            //request.AddJsonBody(test);
-            request.AddParameter("application/json", test, ParameterType.RequestBody);
-
-            restas.Post<string>(request);
-        }
-
-        public void MediatorActions(bool hitormiss, Transportas tr, AbstractLogger logger)
-        {
-            if (hitormiss)
-            {
-                this._mediator.Notify(this, "ATT");
-                logger.logMessage(AbstractLogger.INFO, "You hit: " + tr.name);
-            }
-            else
-            {
-                logger.logMessage(AbstractLogger.INFO, "You missed");
-            }
-        }
-
-
     }
 }
